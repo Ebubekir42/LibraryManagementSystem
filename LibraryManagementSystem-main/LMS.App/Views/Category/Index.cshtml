@@ -1,0 +1,240 @@
+﻿@model List<CategoryBook>
+
+<div class="TamSayfaCerceveAlani">
+    <div class="TamSayfaCerceveSinirlamaAlani">
+    <div class="TamSayfaCerceveAlaniIciAltiCizgiliKategoriAlani">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniKategoriMetni">
+                    Kategori
+                </div>
+            </div>    
+    @*<div class="my-3 text-center" style="font-size:20px; font-weight:bold; background:rgba(200,200,200,0.1); width:240px; margin:0 auto; border-radius:6px; padding:12px; border:solid 1px; ">Kategoriler</div>*@
+    <div class="accordion accordion-flush" id="accordionExample">
+        @foreach(var categoryBook in Model)
+        {
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#_@categoryBook.Category.CategoryId" aria-expanded="false" aria-controls="_@categoryBook.Category.CategoryId">
+                        <div style="font-size:16px;">@categoryBook.Category.CategoryName</div>
+                    </button>
+                </div>
+                <div id="_@categoryBook.Category.CategoryId" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        @for(int i = 1; i <= categoryBook.Books.Count(); i++)
+                        {
+                            <div class="d-flex justify-content-between">
+                                <div style="font-size:16px;" class="p-1 m-1">@i- @categoryBook.Books.ElementAt(i-1).Title</div>
+                                <div>
+                                    <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",categoryBook.Books.ElementAt(i-1).FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(categoryBook.Books.ElementAt(i-1).Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Yayın_Gelis_Tarihi</td>
+                                                        }
+                                                        @if(categoryBook.Books.ElementAt(i-1).CopyRightDate is not null)
+                                                        {
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).CopyRightDate</td>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",categoryBook.Books.ElementAt(i-1).CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",categoryBook.Books.ElementAt(i-1).CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",categoryBook.Books.ElementAt(i-1).ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",categoryBook.Books.ElementAt(i-1).LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Baski</td>
+                                                        </tr>
+                                                        <tr book="@categoryBook.Books.ElementAt(i-1)" book-info=""></tr>
+                                                        @if(categoryBook.Books.ElementAt(i-1).Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@categoryBook.Books.ElementAt(i-1).Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@categoryBook.Books.ElementAt(i-1)" book-category=""></tr>
+                                                        @if(categoryBook.Books.ElementAt(i-1).Summary is not null)
+                                                        {
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Summary</td>
+                                                        }
+                                                        @if(categoryBook.Books.ElementAt(i-1).Konular is not null)
+                                                        {
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Konular</td>
+                                                        }
+                                                        @if(categoryBook.Books.ElementAt(i-1).Notes is not null)
+                                                        {
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Notes</td>
+                                                        }
+                                                        @if(categoryBook.Books.ElementAt(i-1).Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@categoryBook.Books.ElementAt(i-1).Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@categoryBook.Books.ElementAt(i-1).Oda / @categoryBook.Books.ElementAt(i-1).Dolap / @categoryBook.Books.ElementAt(i-1).Raf</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",categoryBook.Books.ElementAt(i-1).BookId)</td>
+                                                        </tr>
+
+                                                        <tr  book="@categoryBook.Books.ElementAt(i-1)" book-loan=""></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@categoryBook.Books.ElementAt(i-1).BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var ayrintiBtn = document.querySelectorAll(".ayrintiBtn");
+    var customModal = document.querySelectorAll(".customModal");
+    var closeModalBtn = document.querySelectorAll(".closeModalBtn");
+    ayrintiBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "block";
+        });
+    });
+    closeModalBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "none";
+        });
+    });
+    window.addEventListener("click",function(event){
+        customModal.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+        loginModal.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+
+    });
+    var oduncAlmalar = document.getElementsByClassName("oduncAlma");
+    var raftalar = document.getElementsByClassName("rafta__");
+    for(var  i= 0; i < raftalar.length; i++){
+        if(raftalar[i].textContent == "Rafta Değil"){
+            oduncAlmalar[i].disabled = true;
+            
+        }
+    }
+
+
+    var openModalLogin = document.querySelectorAll(".openModalLogin");
+    var loginModal = document.querySelectorAll(".loginModal");
+    var closeModalLogin_ = document.querySelectorAll(".closeModalLogin_");
+    openModalLogin.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal[index].style.display = "block";
+        });
+    });
+    closeModalLogin_.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal[index].style.display = "none";
+        });
+    });
+    </script>
+}

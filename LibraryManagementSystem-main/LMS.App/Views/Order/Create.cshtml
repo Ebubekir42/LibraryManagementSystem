@@ -1,0 +1,351 @@
+﻿@model OrderListViewModel
+
+<div class="TamSayfaCerceveAlani">
+    <div class="TamSayfaCerceveSinirlamaAlani">
+        <div class="TamSayfaCerceveAlaniIciYuzdeEllilikSolAlan">
+            <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Kitabı Nasıl Almak İstiyorsun?
+                </div>
+            </div>
+            <form method="post" asp-action="Create" asp-controller="Order">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    
+    <input type="hidden" asp-for="BookId" />
+    <div class="form-check solaKay">
+        <input class="form-check-input" id="bir" type="radio" asp-for="isOrder" value="1">
+        <label class="form-check-label" asp-for="isOrder">
+            Kütüphaneye gidip kitabı almak istiyorum
+        </label>
+    </div>
+    <div class="form-check solaKay">
+        <input class="form-check-input" id="iki" type="radio" asp-for="isOrder" value="2">
+        <label class="form-check-label" asp-for="isOrder">
+            Kargo ile kitabı almak istiyorum
+        </label>
+    </div>
+    <div id="bilgi" style="display:none">
+        
+        <div class="form-group my-3 solaKay">
+            <label asp-for="FirstName">Ad</label>
+            <input asp-for="FirstName" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3 solaKay">
+            <label asp-for="LastName">Soyad</label>
+            <input asp-for="LastName" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3 solaKay">
+            <label asp-for="PhoneNumber">Telefon No</label>
+            <input asp-for="PhoneNumber" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3 solaKay">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3 solaKay" >
+            <label asp-for="ProvinceId">İl</label>
+            <select data-placeholder="İli Seç" class="form-control" asp-items="@ViewBag.Provinces" asp-for="ProvinceId">
+            </select>
+        </div>
+        <div class="form-group my-3 solaKay" >
+            <label asp-for="DistrictId">İlçe</label>
+            <select data-placeholder="İlçeyi Seç" class="form-control" asp-items="@ViewBag.Districts" asp-for="DistrictId">
+            </select>
+        </div>
+        <div class="form-floating solaKay">
+            <textarea class="form-control" name="Address"></textarea>
+            <label for="Address">Adres</label>
+        </div>
+    </div>
+    <button type="Submit" class="btn btn-outline-primary my-3">Tamamla</button>
+</form>
+
+
+
+       
+        </div>
+        <div class="TamSayfaCerceveAlaniIciYuzdeEllilikSagAlan">
+            <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Kitap Bilgileri
+                </div>
+            </div>
+                    <div style="margin-top:13px;" class="TamSayfaCerceveAlaniIciReklamKapsamaAlani">
+						<div class="TamSayfaCerceveAlaniIciReklamResmiAlani">
+							<img src="@Model.Book.Resim" style="height:130px;" border="0" alt="" title="">
+						</div>
+					</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Başlık</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Title</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Format</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("Format",@Model.Book.FormatId)</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">ISBN No</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.ISBN_No</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Yayınlayan</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Yayinlayan</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Yayın Yeri</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Yayin_Yeri</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Yayın Tarihi</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Yayin_Tarihi</div>
+
+                @if(@Model.Book.Yayın_Gelis_Tarihi is not null)
+            {
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Yayın Geliş Tarihi</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Yayın_Gelis_Tarihi</div>
+
+            }
+            @if(@Model.Book.CopyRightDate is not null)
+            {
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Telif Hakkı Tarihi</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.CopyRightDate</div>
+
+            }
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Medya Türü</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("MediaType",Model.Book.CarrierTypeId)</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Taşıyıcı Türü</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("CarrierType",Model.Book.CarrierTypeId)</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">İçerik Türü</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("ContentType",Model.Book.ContentTypeId)</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Dil</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("Language",Model.Book.LanguageId)</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Baskı</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Baski</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Yazar</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("Author",Model.Book.BookId)</div>
+
+                @if(@Model.Book.Sorumlular is not null)
+            {
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Sorumlular</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Sorumlular</div>
+
+            }   
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Kategori</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("Category",Model.Book.CategoryId)</div>
+
+                @if(@Model.Book.Summary is not null)
+            {
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Özet</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Summary</div>
+
+            } 
+
+            @if(@Model.Book.Konular is not null)
+            {
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Konular</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Konular</div>
+
+            } 
+
+            @if(@Model.Book.Notes is not null)
+            {
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Not</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Notes</div>
+
+            } 
+            @if(@Model.Book.Fiziksel_Nitelik is not null)
+            {
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Fiziksel Nitelik</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Fiziksel_Nitelik</div>
+
+            } 
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Kopya</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Kopya</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Oda / Dolap / Raf</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Book.Oda / @Model.Book.Dolap / @Model.Book.Raf</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Ödünç Sayısı</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@await Component.InvokeAsync("BookLoan",Model.Book.BookId)</div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+@*<div class="text-center" style="font-size:25px;">
+    Kitabı Nasıl Almak İstiyorsun?
+</div>
+
+<div class="row">
+        <div class="col-md-5 mt-4">
+            <div>
+                <form method="post" asp-action="Create">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    
+    <input type="hidden" asp-for="BookId" />
+    <div class="form-check">
+        <input class="form-check-input" id="bir" type="radio" asp-for="isOrder" value="1">
+        <label class="form-check-label" asp-for="isOrder">
+            Kütüphaneye gidip kitabı almak istiyorum
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" id="iki" type="radio" asp-for="isOrder" value="2">
+        <label class="form-check-label" asp-for="isOrder">
+            Kargo ile kitabı almak istiyorum
+        </label>
+    </div>
+    <div id="bilgi" style="display:none">
+        
+        <div class="form-group my-3">
+            <label asp-for="FirstName">Ad</label>
+            <input asp-for="FirstName" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="LastName">Soyad</label>
+            <input asp-for="LastName" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="PhoneNumber">Telefon No</label>
+            <input asp-for="PhoneNumber" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" disabled/>
+        </div>
+        <div class="form-group my-3" >
+            <label asp-for="ProvinceId">İl</label>
+            <select data-placeholder="İli Seç" class="form-control" asp-items="@ViewBag.Provinces" asp-for="ProvinceId">
+            </select>
+        </div>
+        <div class="form-group my-3" >
+            <label asp-for="DistrictId">İlçe</label>
+            <select data-placeholder="İlçeyi Seç" class="form-control" asp-items="@ViewBag.Districts" asp-for="DistrictId">
+            </select>
+        </div>
+        <div class="form-floating">
+            <textarea class="form-control" name="Address"></textarea>
+            <label for="Address">Adres</label>
+        </div>
+    </div>
+    <button type="Submit" style="width:auto;" class="btn btn-outline-primary my-3">Tamamla</button>
+</form>
+            </div>
+        </div>
+        <div class="col-md-7 mt-4">
+            <div>
+                <div class="text-start">
+                    <i class="fa-solid fa-book"></i> Kitap Bilgileri
+                </div>
+                <table class="table table-sm table-hover table-striped mt-2">
+                    <tbody>
+                        <tr>
+                            <td class="text-muted small">Başlık</td>
+                            <td>@Model.Book.Title</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted small">ISBN No</td>
+                            <td>@Model.Book.ISBN_No</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted small">Yayınlayan</td>
+                            <td>@Model.Book.Yayinlayan</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted small">Yayın Yeri</td>
+                            <td>@Model.Book.Yayin_Yeri</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted small">Yayın Tarihi</td>
+                            <td>@Model.Book.Yayin_Tarihi</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted small">Baskı</td>
+                            <td>@Model.Book.Baski</td>
+                        </tr>
+                        <tr book="@Model.Book" book-info=""></tr>
+                        <tr book="@Model.Book" book-category=""></tr>
+                        <tr>
+                            <td class="text-muted small">Sayfa No</td>
+                            <td>@Model.Book.Fiziksel_Nitelik</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted small">Kopya</td>
+                            <td>@Model.Book.Kopya</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted small">Ödünç Sayısı</td>
+                            <td>@await Component.InvokeAsync("BookLoan",arguments:@Model.Book.BookId)</td>
+                        </tr>
+                        <tr book="@Model.Book" book-loan=""></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+*@
+
+@section Scripts{
+    <script>
+        if(document.getElementById("iki").checked){
+            document.getElementById("bilgi").style.display = "block";
+        }
+        document.getElementById("bir").addEventListener("change",function(){
+            document.getElementById("bilgi").style.display = "none";
+        });
+        document.getElementById("iki").addEventListener("change",function(){
+            document.getElementById("bilgi").style.display = "block";
+        });      
+        document.getElementById("ProvinceId").addEventListener("change", function() {
+        // Seçenek değiştiğinde yapılacak işlemler buraya gelecek
+
+        // Örneğin, yeni seçilen değeri alabilir ve URL'yi güncelleyebilirsiniz
+        var selectedValue = this.value;
+        var isOrder = document.getElementById("iki").value;
+        saveScrollPosition();
+
+        // Örneğin, mevcut URL'yi al
+        var currentUrl = window.location.href;
+        
+        // Örneğin, URL'deki mevcut sorgu dizesini al
+        //var queryString = window.location.search;
+
+        // Yeni parametreleri ekleyerek güncellenmiş sorgu dizesini oluştur
+        //var updatedQueryString = updateQueryStringParameter(queryString, "ProvinceId", selectedValue);
+
+        // Güncellenmiş sorgu dizesini kullanarak sayfayı yenileme veya yönlendirme
+        //var newUrl = currentUrl.split('?')[0] + updatedQueryString;
+        var newURL =  updateQueryStringParameter(currentUrl, "ProvinceId", selectedValue);
+        newURL = updateQueryStringParameter(newURL, "isOrder",isOrder);
+        window.location.href = newURL;
+
+    });
+
+    // Fonksiyon: Sorgu dizesine yeni parametre eklemek
+    function updateQueryStringParameter(uri, key, value) {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+        window.onload = function () {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        };
+        function saveScrollPosition() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        }
+        window.onload = function () {
+            var scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition !== null) {
+                window.scrollTo(0, scrollPosition);
+                sessionStorage.removeItem('scrollPosition'); // Tek seferlik kullanıldığı için silebilirsiniz
+            }
+        };
+    </script>
+}

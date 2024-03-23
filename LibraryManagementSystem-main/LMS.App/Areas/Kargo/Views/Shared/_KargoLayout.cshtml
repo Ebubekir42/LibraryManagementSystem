@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - @ViewData["Title"]</title>
+    <link rel="stylesheet" asp-append-version="true" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" asp-append-version="true" href="~/css/site.css" />
+    <link rel="stylesheet" asp-append-version="true" href="~/lib/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="~/chosen/chosen.min.css" />
+
+</head>
+
+<body>
+    <div class="TumSayfaAlani">
+        <div class="TamSayfaCerceveAlaniAdmin">
+            <div class="TamSayfaCerceveSinirlamaAlaniAdmin">
+                <div class="AsideSayfaAlani">
+                    <div class="YanMenuAlani">
+                        <aside>
+                            <div style="padding:11px; color:white;">
+                                <div style="font-size:18px;" class="navbarItem">Menü</div>
+                                <div class="navbarItem">
+        <a class="navbarLink" asp-action="Index" asp-controller="Info">Bilgilerim</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Update" asp-controller="Info">Şifreyi Değiştir</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Buy" asp-controller="Order">Kütüphaneden Teslim Alınacak Kitaplar</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Index" asp-controller="Order">Müşteriye Teslim Edilecek Kitaplar</a>
+    </div>
+    
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Logout" asp-controller="Account" asp-area="">Çıkış Yap</a>
+    </div>
+                            </div>                    
+                        </aside>
+                    </div>
+                </div>
+                <div class="AsideKucukSayfaAlani">
+                    
+                </div>
+                <div class="SagTarafAlani">
+                    <div class="SagTarafSinirlamaAlani">
+                        @*<main style="top:0 !important; " role="main" >*@
+                            @RenderBody()
+                        @*</main>*@
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    @*<header>
+
+        @RenderSection("Header",false)
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-custom-navbar" style="background:rgba(0,0,0,0.5);">
+                <partial name="_Navbar"/>
+            </div>
+            <div class="col-custom-content" style="background:rgba(200,200,200,0.2);">
+                <div>
+                    <partial name="_Notification" />
+                </div>
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+        
+        
+    </div>
+    <footer>
+        @RenderSection("Footer",false)
+        <partial name="_Footer" />
+        
+    </footer>*@
+    <script asp-append-version="true" src="~/lib/jquery/jquery.min.js"></script>
+    <script asp-append-version="true" src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script asp-append-version="true" src="~/js/site.js"></script>
+    <script asp-append-version="true" src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src=~/chosen/chosen.jquery.min.js></script>
+
+    @await RenderSectionAsync("Scripts",required:false)
+</body>
+
+</html>

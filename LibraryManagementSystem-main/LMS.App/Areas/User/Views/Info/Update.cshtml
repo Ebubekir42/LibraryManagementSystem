@@ -1,0 +1,179 @@
+﻿@model UserDtoForUpdate
+
+<div class="TamSayfaCerceveAlaniUser">
+    <div class="TamSayfaCerceveSinirlamaAlaniUser">
+        <div class="TamSayfaCerceveAlaniIciYuzdeYuzlukAlan">
+            <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Hesabım &#8250; Şifre Değiştirme
+                </div>
+            </div>
+            <div class="TamSayfaCerceveAlaniIciHesapMenuleriAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciHesapMenuleriDengelemeAlaniUser">
+                    <div class="TamSayfaCerceveAlaniIciHesapMenusuSinirlamaAlaniUser">
+                        <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetinAlaniUser">
+                            <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetniUser">
+                                <a asp-action="Index" asp-controller="Loan">Ödünç Aldığım Kitaplar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="TamSayfaCerceveAlaniIciHesapMenusuSinirlamaAlaniUser">
+                        <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetinAlaniUser">
+                            <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetniUser">
+                                <a asp-action="Index" asp-controller="Info">Bilgilerim</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="TamSayfaCerceveAlaniIciHesapMenusuSinirlamaAlaniUser">
+                        <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetinAlaniUser">
+                            <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetniUser">
+                                <a asp-action="Update" asp-controller="Info">Şifre Değiştirme</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="UyelikBilgileriUser" method="post" asp-action="Update">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <input type="hidden" asp-for="Id" />
+                <input  type="hidden" asp-for="Password"/>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label >Eski Parola</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input type="password" class="FormElemanlariTextInputlari" /></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label >Yeni Parola</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input type="password" class="FormElemanlariTextInputlari" /></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label >Yeni Parola (Tekrar)</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input type="password" class="FormElemanlariTextInputlari" /></div>
+                <div style="margin-top:13px;" class="ButonlarIcinKapsamaAlani"><input type="submit" value="Şifreyi Güncelle" class="FormElemanlariYesilButonlar" tabindex="6"></div>
+            @*<div class="row">
+                <div class="col-6">
+                    <div class="form-group my-3" >
+                    <label asp-for="IdentityNumber">T.C Kimlik No</label>
+                    <input asp-for="IdentityNumber" class="form-control" />
+                </div>
+                <div class="form-group my-3" >
+                    <label asp-for="FirstName">Ad</label>
+                    <input asp-for="FirstName" class="form-control" />
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="LastName">Soyad</label>
+                    <input asp-for="LastName" class="form-control" />
+                </div>
+    
+                </div>
+                <div class="col-6">
+                    <div class="form-group my-3">
+                    <label asp-for="Email">E-Mail</label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                </div>
+                    <div class="form-group my-3">
+                    <label asp-for="PhoneNumber">Telefon No</label>
+                    <input asp-for="PhoneNumber" type="tel" class="form-control" />
+                </div>
+                </div>
+            </div>
+                <div class="form-group my-3">
+        
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fa fa-save"></i>Kaydet
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-primary">
+                            <i class="fa fa-list"></i>Dashboard
+                        </a>
+     
+                </div>*@
+
+            </form>
+            @*<form class="UyelikBilgileriUser" action="#" method="post">
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">İsim Soyisim</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">Volkan Alakent</div>
+			
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">E-Mail Adresi</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">info@extraegitim.com</div>
+			
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Şifre</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">12345678</div>
+				
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Cep Telefonu</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">0535 225 51 44</div>
+				
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">E-Mail İle Haberdar Olma Durumu</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">Aktif</div>
+				
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Sms İle Haberdar Olma Durumu</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">Pasif</div>
+				
+				<div class="ButonlarIcinKapsamaAlani"><input type="submit" value="Bilgilerimi Güncellemek İstiyorum" class="FormElemanlariTuruncuButonlarUser" tabindex="6"></div>
+			</form>*@
+        </div>
+    </div>
+</div>
+
+
+@*<form method="post" asp-action="Update">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="Id" />
+    <input  type="hidden" asp-for="Password"/>
+<div class="row">
+    <div class="col-6">
+        <div class="form-group my-3" >
+        <label asp-for="IdentityNumber">T.C Kimlik No</label>
+        <input asp-for="IdentityNumber" class="form-control" />
+    </div>
+    <div class="form-group my-3" >
+        <label asp-for="FirstName">Ad</label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="LastName">Soyad</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    
+    </div>
+    <div class="col-6">
+        <div class="form-group my-3">
+        <label asp-for="Email">E-Mail</label>
+        <input asp-for="Email" type="email" class="form-control" />
+    </div>
+        <div class="form-group my-3">
+        <label asp-for="PhoneNumber">Telefon No</label>
+        <input asp-for="PhoneNumber" type="tel" class="form-control" />
+    </div>
+    </div>
+</div>
+    <div class="form-group my-3">
+        
+            <button class="btn btn-primary" type="submit">
+                <i class="fa fa-save"></i>Kaydet
+            </button>
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="fa fa-list"></i>Dashboard
+            </a>
+     
+    </div>
+
+</form>*@
+
+@*<div class="row">
+    <div class="col-6">
+        <form style="position:relative;">
+            <div asp-validation-summary="All"></div>
+            <div class="form-group my-3">
+                <label>Eski Şifre</label>
+                <input type="password" class="form-control" />
+            </div>
+            <div class="form-group my-3">
+                <label>Yeni Şifre</label>
+                <input type="password" class="form-control" />
+            </div>
+            <div class="form-group my-3">
+                <label>Yeni Şifre (Tekrar)</label>
+                <input type="password" class="form-control" />
+            </div>
+
+            <button style="width:89px; position:absolute; right:1px;" type="submit" class="btn btn-outline-primary my-3">Kaydet</button>
+  
+        </form>
+        
+
+    </div>
+</div>*@

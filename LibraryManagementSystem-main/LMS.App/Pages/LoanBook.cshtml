@@ -1,0 +1,32 @@
+﻿@page "/loanbook"
+@using LMS.App.Pages
+@model LoanBookModel
+<div class="text-center"> 
+    Kitabı Nasıl Almak İstiyorsun?
+</div>
+<div>
+    @*
+        Adı
+        soyadı
+        Email
+        Telefon
+        İl
+        İlçe
+        Adres
+
+    *@
+    <form method="get" action="/user/loan/den">
+        <input name="status" type="radio" value="0" /> <label>Kütüphaneye gidip kitabı almak istiyorum</label>
+        <input name="status" type="radio" value="1" /> <label>Kargo ile kitabı almak istiyorum</label>
+        <div>
+            <label for="FirstName">Ad:</label><input name="FirstName" value="@Model.User.FirstName" disabled/>
+            <label for="LastName">Soyad:</label><input name="LastName" value="@Model.User.LastName" disabled/>
+            <label for="Email">Email:</label><input name="Email" value="@Model.User.Email" disabled/>
+            <label for="PhoneNumber">Telefon No:</label><input name="PhoneNumber" value="@Model.User.PhoneNumber" disabled/>
+            <labe
+            
+            @Model.User.FirstName @Model.User.LastName
+        </div>
+        <button type="submit" >Tamamla</button>
+    </form>   
+</div>

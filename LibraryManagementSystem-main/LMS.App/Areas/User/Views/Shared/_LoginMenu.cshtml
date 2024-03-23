@@ -1,0 +1,66 @@
+﻿@if(User.Identity.IsAuthenticated && User.IsInRole("Admin")){
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+            <i class="fa-solid fa-gear"></i>
+            Admin</a>
+    </li>
+}
+else if(User.Identity.IsAuthenticated && User.IsInRole("User"))
+{
+    <li class="nav-item">
+        @*<a class="nav-link" aria-current="page" href="#">
+            <i class="fa-solid fa-gear"></i>
+            Kullanıcı</a>*@
+        <div class="dropdown">
+            <button class="dropdown-btn btn">Üye</button>
+            <div class="dropdown-content">
+                <a asp-action="Index" asp-controller="Info">Bilgilerim</a>
+                <a asp-action="Update" asp-controller="Info">Şifreyi Değiştir</a>
+                <a asp-action="Index" asp-controller="Loan">Ödünç Aldıklarım</a>
+            </div>
+        </div>
+    </li>
+}
+@if(User.Identity.IsAuthenticated){
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" asp-area="" asp-controller="Account"
+        asp-route-returnUrl="@Context.Request.PathAndQuery()" asp-action="Logout">
+         <i class="fa-solid fa-right-from-bracket"></i>
+        Çıkış Yap</a>
+    </li>
+}
+else{
+    if (!Context.Request.PathAndQuery().Contains("returnUrl"))
+    {
+        if (Context.Request.PathAndQuery().Contains("login"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-area="" asp-controller="Account"
+                asp-route-returnUrl="/" asp-action="Login">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Giriş Yap</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" asp-area="" asp-controller="Account"
+                asp-route-returnUrl="@Context.Request.PathAndQuery()" asp-action="Login">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Giriş Yap</a>
+            </li>
+        }
+        
+    }
+    else
+    {
+        int index = Context.Request.PathAndQuery().IndexOf("=");
+        var text = "/" + Context.Request.PathAndQuery().Substring(index + 4);
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" asp-area="" asp-controller="Account"
+            asp-route-returnUrl="@text" asp-action="Login">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Giriş Yap</a>
+        </li>
+    }
+}

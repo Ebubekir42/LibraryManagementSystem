@@ -1,0 +1,947 @@
+﻿@model BookListViewModel
+@*Orijinal*@
+<div class="TamSayfaCerceveAlani">
+    <div class="TamSayfaCerceveSinirlamaAlani">
+        @if(TempData["info"] is not null)
+        {
+            <div class="info-modal customModal" style="display:block;">
+                <div class="info-modal-content" style="width:382px; background:rgb(255,0,0); color:white;">
+                    <span style="position:relative; top:-25px"; class="info-close closeModalBtn" >&times;</span>
+                        @TempData["info"]
+                </div>
+            </div>
+        }
+        <div id="TamSayfaSolSutunSinirlamaAlani">
+            <div id="TamSayfaSolSutunIcMenuAlani">
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Kategori</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" name="inKategori" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.Categories)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="categoryId" value="@book.CategoryId" onchange="changeUrl()"  class="custom-checkbox" />
+                                        <div class="divAlani ">@book.CategoryName</div>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Yazar</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.Authors)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="authorId" value="@book.AuthorId" onchange="changeUrl()"  class="custom-checkbox" />
+                                        <div class="divAlani ">@book.FirstName @book.LastName</div>
+                                    </label>  
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Format</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.Formats)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="formatId" value="@book.FormatId" onchange="changeUrl()"  class="custom-checkbox" />
+                                        <div class="divAlani ">@book.FormatName</div>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">İçerik Türü</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.ContentTypes)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="contentTypeId" value="@book.ContentTypeId" onchange="changeUrl()"  class="custom-checkbox" />
+                                        <div class="divAlani ">@book.ContentName</div>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Medya Türü</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.MediaTypes)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="mediaTypeId" value="@book.MediaTypeId" onchange="changeUrl()"  class="custom-checkbox" />
+                                        <div class="divAlani ">@book.MediaName</div>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Taşıyıcı Türü</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.CarrierTypes)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="carrierTypeId" value="@book.CarrierTypeId" onchange="changeUrl()"  class="custom-checkbox" />
+                                        <div class="divAlani ">@book.CarrierName</div>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Dil</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.Languages)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="languageId" value="@book.LanguageId" onchange="changeUrl()" class="custom-checkbox" />
+                                        <div class="divAlani ">@book.Name</div>
+                                    </label>  
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Yayın Yeri</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.YayinYeri)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="yayin_Yeri" value="@book" onchange="changeUrl()" class="custom-checkbox" />
+                                        <div class="divAlani ">@book</div>
+                                    </label>  
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="anaAlani">
+                    <div class="filtreTitle" >
+                        <div class="titleContent">Yayınlayan</div>
+                        <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; right:5px;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; right:5px; display:none;"></i></div>
+                    </div>
+                    <div class="filtreAlani" style="display:none;" >
+                        <div class="filtreInputAlani">
+                            <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                            <input class="filtreInput" type="text" />
+                        </div>
+                        <div>
+                            <div class="filtreLabelAlani" >
+                                @foreach(var book in Model.Yayinlayan)
+                                {
+                                    <label class="labelAlani " style="display:flex;">
+                                        <input type="checkbox" name="yayin_layan" value="@book" onchange="changeUrl()" class="custom-checkbox" />
+                                        <div class="divAlani ">@book</div>
+                                    </label>  
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="TamSayfaSagSutunSinirlamaAlani">
+            @*<div id="TamSayfaSagSutunIciAramaAlani">
+                <form asp-action="Index" asp-controller="Book" method="get">
+                    <div class="TamSayfaSagSutunIciAramaAlaniButonlarIcinKapsamaAlani"><input type="submit" value="" class="TamSayfaSagSutunIciAramaAlaniAramaYapButonlari"></div>
+                    <div class="TamSayfaSagSutunIciSeciliIcinKapsamaAlani" >
+                        <div class="titleContent" style="padding:8px 7px; width:100%; position:relative;">
+                            <div class="titContent">Tüm Alanlarda</div>
+                            <div id="titOzellik" style="display:none; border:1px solid #ccc; height:auto; width:calc(100% + 3px); z-index:95; position:absolute; top:34px; left:0px; background:#fff; padding:4px;" >
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Tüm Alanlarda</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Kitap Adı</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Yazar</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Dil</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Yayınlayan</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Yayın Yeri</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Medya Türü</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Taşıyıcı Türü</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">İçerik Türü</div>
+                                </div>
+                                <div class="seciliTitleDiv">
+                                    <div class="seciliTitleButton">Format</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="filtreBtn_" style="top:10px; right:10px; height:12px;"><i id="asagi" class="fa-solid fa-caret-down" style="position:absolute; display:inline-block; left:4px;" ></i><i id="yukari" class="fa-solid fa-caret-up" style="position:absolute; display:none; left:4px;"></i></div>
+                    </div>
+                    <div style="margin-bottom:9px;" class="TamSayfaSagSutunIciAramaAlaniInputAlanlariKapsayicisi"><input type="text" name="Arama" class="TamSayfaSagSutunIciAramaAlaniTextInputlari"></div>
+                </form>
+            </div>*@
+            <div id="TamSayfaSagSutunIciUrunlerAlani">
+                <div id="TamSayfaSagSutunIciUrunlerDengelemeAlani">
+                    @foreach(var book in Model.Books)
+                    {
+                        <div class="TamSayfaSagSutunIciUrunSinirlamaAlani">
+                            <div class="TamSayfaYeniUrunResmiDisCercevesi">
+				                <img src="@book.Resim" border="0"/>
+			                </div>
+			                <div class="TamSayfaYeniUrunUstBaslikMetni">@book.Title</div>
+			                <table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				                <tbody>
+					                <tr>
+						                <td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						                <td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						                <td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",book.BookId)</td>
+					                </tr>
+					                <tr>
+						                <td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						                <td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						                <td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta_">@await Component.InvokeAsync("BookDurum",book.BookId)</td>
+					                </tr>
+				                </tbody>
+			                </table>
+		
+			                <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",book.FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@book.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@book.ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@book.Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@book.Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@book.Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(book.Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@book.Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(book.CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@book.CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",book.ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",book.LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@book.Baski</td>
+                                                        </tr>
+                                                        <tr book="@book" book-info=""></tr>
+                                                        @if(book.Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@book.Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@book" book-category=""></tr>
+                                                        @if(book.Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@book.Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(book.Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@book.Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(book.Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@book.Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(book.Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@book.Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@book.Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@book.Oda / @book.Dolap / @book.Raf</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",book.BookId)</td>
+                                                        </tr>
+
+                                                        <tr book="@book" book-loan=""></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="@book.BookId" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="display:inline-block;">
+                                                        <input type="hidden" name="bookId" value="@book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="@book.BookId" class="FormElemanlariYesilButonlar" >Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+                        </div>
+                    }
+   
+         
+
+
+      
+                </div>
+            </div>
+            <div id="SayfalamaAlani">
+                <div class="text-center btn-group">
+                    @*<div page-model="@Model.Pagination" categoryId="@Model.categoryId" page-action="Index" page-classes-enabled="true" page-class="btn"
+                        page-class-normal="btn-outline-dark" page-class-selected="btn-secondary" class="btn-group">
+                    </div>*@
+                    <form asp-action="Index" method="get">
+                        <input type="hidden" name="formatId" value="@Model.formatId" />
+                        <input type="hidden" name="contentTypeId" value="@Model.contentTypeId" />
+                        <input type="hidden" name="carrierTypeId" value="@Model.carrierTypeId" />
+                        <input type="hidden" name="mediaTypeId" value="@Model.mediaTypeId" />
+                        <input type="hidden" name="languageId" value="@Model.languageId" />
+                        <input type="hidden" name="categoryId" value="@Model.categoryId" />
+                        <input type="hidden" name="authorId" value="@Model.authorId" />
+                        <input type="hidden" name="yayin_Yeri" value="@Model.yayin_Yeri" />
+                        <input type="hidden" name="yayin_layan" value="@Model.yayin_layan" />
+
+
+                        @for(int i = 1; i <= @Model.Pagination.TotalPages; i++){
+                            @if(i.ToString().Equals(Model.Pagination.CurrentPage.ToString()) )
+                            {
+                                <button name="PageNumber" value="@i" class="btn btn-secondary">@i</button>
+                            }
+                            else
+                            {
+                                <button name="PageNumber" value="@i" class="btn btn-outline-dark">@i</button>       
+                            }
+                        }
+                    </form>
+                </div>
+            </div>
+        </div>
+    </> 
+</div>
+
+
+
+
+@section Scripts{
+    <script>
+    window.onload = function() {
+        window.scrollTo(0,0);
+    };
+
+    var ayrintiBtn = document.querySelectorAll(".ayrintiBtn");
+    var customModal = document.querySelectorAll(".customModal");
+    var closeModalBtn = document.querySelectorAll(".closeModalBtn");
+    ayrintiBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "block";
+        });
+    });
+    closeModalBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "none";
+        });
+    });
+    window.addEventListener("click",function(event){
+        customModal.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+        loginModal.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+        loginModal_.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+    });
+
+    //document.getElementById('filtreBtn_').addEventListener('click', function() {
+    //    var titOzellikDiv = document.getElementById('titOzellik');
+    //    var caretDownIcon = document.querySelector('#asagi');
+    //    var caretUpIcon = document.querySelector('#yukari'); 
+
+    //    if (titOzellikDiv.style.display === 'block') {
+    //        titOzellikDiv.style.display = 'none';
+    //        caretDownIcon.style.display = 'inline-block';
+    //        caretUpIcon.style.display = 'none';
+    //    } else {
+    //        titOzellikDiv.style.display = 'block';
+    //        caretDownIcon.style.display = 'none';
+    //        caretUpIcon.style.display = 'inline-block';
+    //    }
+    //});
+    var seciliTitleButtons = document.querySelectorAll('.seciliTitleButton');
+    var titContent = document.querySelector('.titContent');
+
+    // Her bir "seciliTitleButton" elementi için click event listener ekleyin
+    seciliTitleButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Tıklanan div'in metnini "titContent" içeriğine yaz
+            titContent.textContent = button.textContent;
+            document.getElementById('titOzellik').style.display = "none";
+            document.querySelector('#asagi').style.display = "inline-block";
+            document.querySelector('#yukari').style.display = "none";
+
+        });
+    });
+
+
+    var openModalLogin = document.querySelectorAll(".openModalLogin");
+    var loginModal = document.querySelectorAll(".loginModal");
+    var closeModalLogin_ = document.querySelectorAll(".closeModalLogin_");
+    openModalLogin.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal[index].style.display = "block";
+        });
+    });
+    closeModalLogin_.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal[index].style.display = "none";
+        });
+    });
+
+    var openModalLogin_ = document.querySelectorAll(".openModalLogin_");
+    var loginModal_ = document.querySelectorAll(".loginModal_");
+    var closeModalLogin__ = document.querySelectorAll(".closeModalLogin__");
+    openModalLogin_.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal_[index].style.display = "block";
+        });
+    });
+    closeModalLogin__.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal_[index].style.display = "none";
+        });
+    });
+
+    //document.getElementsByClassName("TamSayfaSagSutunIciAramaAlaniAramaYapButonlari").addEventListener("click",function(e){
+    //    var selectedFilter = document.querySelector("seciliTitleButton.active").textContent;
+    //    var inputValue = document.getElementsByClassName("TamSayfaSagSutunIciAramaAlaniTextInputlari").value;
+
+    //})
+    //$(".TamSayfaSagSutunIciAramaAlaniAramaYapButonlari").click(function (e) {
+    //            e.preventDefault();
+
+    //            // Get the selected filter button text
+    //            //var selectedFilter = $(".seciliTitleButton.active").text();
+                
+    //            var selectedFilter = $(".titContent").text();
+
+    //            // Get the input value
+    //            var inputValue = $(".TamSayfaSagSutunIciAramaAlaniTextInputlari").val();
+
+    //            // Append filter and input values to the URL
+    //            var url = window.location.pathname + "?filter=" + encodeURIComponent(selectedFilter) + "&value=" + encodeURIComponent(inputValue);
+
+    //            // Redirect to the constructed URL
+    //            window.location.href = url;
+    //        });
+
+    //        // Handle filter button clicks
+    //        $(".seciliTitleButton").click(function () {
+    //            var selectedFilter = $(this).text();
+
+    //            // Set active class to the clicked filter button
+    //            $(".seciliTitleButton").removeClass("active");
+    //            $(this).addClass("active");
+
+    //            // Set the selected filter text to the main button
+    //            $(".titContent").text(selectedFilter);
+    //        });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Sayfa yüklendiğinde parametreleri kontrol et
+
+        checkUrlParameters();
+
+        
+        //var filtreBtn = document.getElementById('filtreBtn_');
+        //var titOzellik = document.getElementById('titOzellik');
+
+        //filtreBtn.addEventListener('click', function () {
+        //    if (titOzellik.style.display === 'block') {
+        //        titOzellik.style.display = 'none';
+        //    } else {
+        //        titOzellik.style.display = 'block';
+        //    }
+        //});
+        
+        
+    
+    });
+
+    function checkUrlParameters() {
+      var urlParams = new URLSearchParams(window.location.search);
+
+      var categoryCheckboxes = document.querySelectorAll('input[name="categoryId"]');
+      categoryCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('categoryId') && urlParams.get('categoryId').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      var authorCheckboxes = document.querySelectorAll('input[name="authorId"]');
+      authorCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('authorId') && urlParams.get('authorId').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      var formatCheckboxes = document.querySelectorAll('input[name="formatId"]');
+      formatCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('formatId') && urlParams.get('formatId').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      var contentTypeCheckboxes = document.querySelectorAll('input[name="contentTypeId"]');
+      contentTypeCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('contentTypeId') && urlParams.get('contentTypeId').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      var carrierTypeCheckboxes = document.querySelectorAll('input[name="carrierTypeId"]');
+      carrierTypeCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('carrierTypeId') && urlParams.get('carrierTypeId').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      var mediaTypeCheckboxes = document.querySelectorAll('input[name="mediaTypeId"]');
+      mediaTypeCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('mediaTypeId') && urlParams.get('mediaTypeId').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+
+      var languageCheckboxes = document.querySelectorAll('input[name="languageId"]');
+      languageCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('languageId') && urlParams.get('languageId').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      var yayinYeriCheckboxes = document.querySelectorAll('input[name="yayin_Yeri"]');
+      yayinYeriCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('yayin_Yeri') && urlParams.get('yayin_Yeri').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      var yayinlayanCheckboxes = document.querySelectorAll('input[name="yayin_layan"]');
+      yayinlayanCheckboxes.forEach(function (checkbox) {
+        var languageId = checkbox.value;
+        if (urlParams.has('yayin_layan') && urlParams.get('yayin_layan').split(',').includes(languageId)) {
+          checkbox.checked = true;
+        }
+      });
+
+      if(urlParams.has("values")){
+          var valuesCheckboxes = document.querySelectorAll('.filtreAlani');
+      valuesCheckboxes.forEach(function (checkbox,index) {
+          var container = checkbox.closest(".anaAlani");
+            var filtreAlani = container.querySelector(".filtreAlani");
+            var filtreDowm = container.querySelector(".fa-caret-down");
+            var filtreUp = container.querySelector(".fa-caret-up");
+        if (urlParams.has('values') && urlParams.get('values').split(',').includes(index.toString())) {
+ 
+            filtreAlani.style.display = "block";
+            filtreDowm.style.display = "none";
+            filtreUp.style.display = "inline-block";
+        }
+        else{
+     
+            filtreAlani.style.display = "nonw";
+                    filtreDowm.style.display = "inline-block";
+                    filtreUp.style.display = "none";
+        }
+      });
+      }
+      
+
+      //filtreBtns.forEach(function(btn,index){
+      //      btn.addEventListener("click",function(){
+      //          var container = btn.closest(".anaAlani");
+      //          var filtreAlani = container.querySelector(".filtreAlani");
+      //          var filtreDowm = container.querySelector(".fa-caret-down");
+      //          var filtreUp = container.querySelector(".fa-caret-up");
+      //          if(filtreAlani.style.display.includes("block")){
+      //              filtreAlani.style.display = "none";
+      //              filtreDowm.style.display = "inline-block";
+      //              filtreUp.style.display = "none";
+      //          }
+      //          else{
+      //              filtreAlani.style.display = "block";
+      //              filtreDowm.style.display = "none";
+      //              filtreUp.style.display = "inline-block";
+      //          }
+      //      });
+      //  });
+    }
+        
+
+          
+
+
+        function changeUrl() {
+          var selectedFormats = getSelectedValues("formatId");
+          var selectedLanguages = getSelectedValues("languageId");
+          var selectedCategories = getSelectedValues("categoryId");
+          var selectedAuthors = getSelectedValues("authorId");
+          var selectedYayinYeri = getSelectedValues("yayin_Yeri");
+          var selectedYayinlayan = getSelectedValues("yayin_layan");
+          var selectedContentTypes = getSelectedValues("contentTypeId");
+          var selectedCarrierTypes = getSelectedValues("carrierTypeId");
+          var selectedMediaTypes = getSelectedValues("mediaTypeId");
+
+          
+    
+          var filtres = document.querySelectorAll(".filtreAlani");
+          var values = Array.from(filtres).map(function (checkbox,index) {
+            if(checkbox.style.display == "block"){
+ 
+                return index;
+            }
+            else
+          
+                return -1;
+          });
+        //  var urlParams = new URLSearchParams(window.location.search);
+
+        //// Get the values of "filter" and "value" parameters
+        //var filterValue = urlParams.get("filter");
+        //var value = urlParams.get("value");
+
+        //if(filterValue == null){
+        //  var newUrl = window.location.pathname + "?formatId=" + selectedFormats.join(",") + "&contentTypeId=" + selectedContentTypes.join(",") + "&carrierTypeId=" + selectedCarrierTypes.join(",") + "&mediaTypeId=" + selectedMediaTypes.join(",") + "&languageId=" + selectedLanguages.join(",") + "&categoryId=" + selectedCategories.join(",") + "&yayin_layan=" + selectedYayinlayan.join(",") + "&yayin_Yeri=" + selectedYayinYeri.join(",") + "&authorId=" + selectedAuthors.join(",") + "&PageNumber=" + 1;
+
+        //}
+        //else{
+        //  var newUrl = window.location.pathname + window.location.search + "&formatId=" + selectedFormats.join(",") + "&contentTypeId=" + selectedContentTypes.join(",") + "&carrierTypeId=" + selectedCarrierTypes.join(",") + "&mediaTypeId=" + selectedMediaTypes.join(",") + "&languageId=" + selectedLanguages.join(",") + "&categoryId=" + selectedCategories.join(",") + "&yayin_layan=" + selectedYayinlayan.join(",") + "&yayin_Yeri=" + selectedYayinYeri.join(",") + "&authorId=" + selectedAuthors.join(",") + "&PageNumber=" + 1;
+
+        //}
+          // Örnek olarak seçilen formatId'leri ve languageId'leri birleştirip URL'yi güncelle
+          //var newUrl = window.location.pathname + "?formatId=" + selectedFormats.join(",") + "&mediaTypeId=" + selectedMediaTypes.join(",") + "&languageId=" + selectedLanguages.join(",") + "&categoryId=" + selectedCategories.join(",") + "&yayin_Yeri=" + selectedYayinYeri.join(",") + "&authorId=" + selectedAuthors.join(",") + "&PageNumber=" + 1;
+          var newUrl = window.location.pathname + "?formatId=" + selectedFormats.join(",") + "&values=" + values.join(",") + "&contentTypeId=" + selectedContentTypes.join(",") + "&carrierTypeId=" + selectedCarrierTypes.join(",") + "&mediaTypeId=" + selectedMediaTypes.join(",") + "&languageId=" + selectedLanguages.join(",") + "&categoryId=" + selectedCategories.join(",") + "&yayin_layan=" + selectedYayinlayan.join(",") + "&yayin_Yeri=" + selectedYayinYeri.join(",") + "&authorId=" + selectedAuthors.join(",") + "&PageNumber=" + 1;
+          window.history.replaceState({}, '', newUrl);
+          location.reload();
+        }
+        
+        function getSelectedValues(checkboxName) {
+          var checkboxes = document.querySelectorAll('input[name="' + checkboxName + '"]:checked');
+          var values = Array.from(checkboxes).map(function (checkbox) {
+            return checkbox.value;
+          });
+          return values;
+        }
+
+
+        var filtreBtns = document.querySelectorAll(".filtreBtn");
+        filtreBtns.forEach(function(btn,index){
+            btn.addEventListener("click",function(){
+                var container = btn.closest(".anaAlani");
+                var filtreAlani = container.querySelector(".filtreAlani");
+                var filtreDowm = container.querySelector(".fa-caret-down");
+                var filtreUp = container.querySelector(".fa-caret-up");
+                if(filtreAlani.style.display.includes("block")){
+                    filtreAlani.style.display = "none";
+                    filtreDowm.style.display = "inline-block";
+                    filtreUp.style.display = "none";
+                }
+                else{
+                    filtreAlani.style.display = "block";
+                    filtreDowm.style.display = "none";
+                    filtreUp.style.display = "inline-block";
+                }
+            });
+        });
+
+        var filtreInputs = document.querySelectorAll(".filtreInput");
+        filtreInputs.forEach(function(btn, index){
+            btn.addEventListener("focus",function(){
+                var container = btn.closest(".anaAlani");
+                var filtreInputAlani = container.querySelector(".filtreInputAlani");
+                filtreInputAlani.style.border = "2px solid #ff6000";
+            });
+            btn.addEventListener("blur",function(){
+                var container = btn.closest(".anaAlani");
+                var filtreInputAlani = container.querySelector(".filtreInputAlani");
+                filtreInputAlani.style.border = "solid 2px rgb(200,200,200)"
+            });
+            btn.addEventListener("keyup",function(event){
+                var container = btn.closest(".anaAlani");
+                var _div = container.querySelectorAll(".divAlani");
+                var _label = container.querySelectorAll(".labelAlani");
+                if(event.key == "Backspace"){
+                    for(var i = 0; i < _div.length; i++){
+                        if(_div[i].innerHTML.toLowerCase().includes(btn.value.toLowerCase())){
+                            if(_label[i].style.display == "none")
+                                _label[i].style.display = "flex";
+                        }
+                    }
+                }
+                else{
+                    for(var i = 0; i < _div.length; i++){
+                        if(!_div[i].innerHTML.toLowerCase().includes(btn.value.toLowerCase())){
+                            _label[i].style.display = "none";
+                        }
+                    }
+                    
+                }
+
+            });
+        })
+    </script>
+    <script>
+
+        var oduncAlmalar = document.getElementsByClassName("oduncAlma");
+    var raftalar = document.getElementsByClassName("rafta_");
+    
+    for(var  i= 0; i < raftalar.length; i++){
+        if(raftalar[i].textContent == "Rafta Değil"){
+            oduncAlmalar[2*i].disabled = true;
+            oduncAlmalar[2*i + 1].disabled = true;
+        }
+    }
+        
+        //if(items.length != 0){
+        //    var span = document.getElementsByClassName("durum");
+        //    for(var i = 0; i < span.length; i++){
+        //        if(span[i].innerHTML.includes("Rafta")){
+        //            items[2*i].disabled = false;
+        //            items[2*i+1].disabled = false;
+        //        }
+        //        else{
+        //            items[2*i].disabled = true;
+        //            items[2*i+1].disabled = true;
+        //        }
+        //    }
+        //}
+        
+    </script>
+
+} 

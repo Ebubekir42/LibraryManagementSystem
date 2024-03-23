@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - @ViewData["Title"]</title>
+    <link asp-append-version="true" rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
+    <link asp-append-version="true" rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+
+
+</head>
+
+<body>
+    <div class="TumSayfaAlani">
+        <header>
+            <div id="HeaderAlani">
+                <div id="HeaderMesajAlani">
+                    <div id="HeaderUstMesajAlani">T.C. KÜLTÜR VE TURİZM BAKANLIĞI</div>
+                    <div id="HeaderAltMesajAlani">Konya İl Halk Kütüphanesi</div>
+                </div>
+                <div id="HeaderMenuAlani">
+                    <div id="HeaderMenuUstuAlani">
+                        <div id="HeaderMenuUstuSinirlamaAlani">
+                            <ul id="HeaderMenuUstuSeceneklerAlani">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Index" asp-controller="Loan" asp-area="User"><img src="~/images/KullaniciBeyaz16x16.png" border="0"/></a></li>
+                                    @if (User.IsInRole("User"))
+                                    {
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Index" asp-controller="Loan" asp-area="User">Hesabım</a></li>
+                                        
+                                    }
+                                    else if (User.IsInRole("Admin"))
+                                    {
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Index" asp-controller="Dashboard" asp-area="Admin">Hesabım</a></li>
+                                        
+                                    }
+                                    else if (User.IsInRole("Personel"))
+                                    {
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Index" asp-controller="Dashboard" asp-area="Personel">Hesabım</a></li>
+                                        
+                                    }
+                                    else
+                                    {
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Index" asp-controller="Order" asp-area="Kargo">Hesabım</a></li>
+                                        
+                                    }
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Logout" asp-controller="Account"><img src="~/images/CikisBeyaz16x16.png" border="0"/></a></li>
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Logout" asp-controller="Account">Çıkış Yap</a></li>
+                                }
+                                else
+                                {
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Index" asp-controller="Home"><img src="~/images/KullaniciBeyaz16x16.png" border="0"/></a></li>
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Index" asp-controller="Home">Giriş Yap</a></li>
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Register" asp-controller="Account"><img src="~/images/KullaniciEkleBeyaz16x16.png" border="0"/></a></li>
+                                    <li class="HeaderMenuUstuSecenekleri"><a asp-action="Register" asp-controller="Account">Üye Ol</a></li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="HeaderMenuSinirlamaAlani">
+                        <div id="HeaderMenuLogoAlani">
+                            <a asp-action="Anasayfa" asp-controller="Home"><img src="~/images/logo.png" border="0"/></a>
+                            <div id="HeaderMenuLogoMetni">SELÇUKLU BELEDİYESİ</div>
+                        </div>
+                        <div id="HeaderMenuNavAlani">
+                            <nav id="HeaderMenuNav">
+                                <ul id="HeaderMenuSeceneklerAlani">
+                                    <li class="HeaderMenuSecenekleri"><a asp-action="Anasayfa" asp-controller="Home">Anasayfa</a></li>
+                                    <li class="HeaderMenuSecenekleri"><a asp-action="Hakkimizda" asp-controller="Home">Hakkımızda</a></li>
+                                    <li class="HeaderMenuSecenekleri"><a asp-action="Index" asp-controller="Book">Kitap</a></li>
+                                    <li class="HeaderMenuSecenekleri"><a asp-action="Index" asp-controller="Category">Kategori</a></li>
+                                    <li class="HeaderMenuSecenekleri"><a asp-action="Index" asp-controller="Author">Yazar</a></li>
+                                    <li class="HeaderMenuSecenekleri"><a asp-page="/contact";>İletişim</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div id="HeaderMenuAcmaButonuAlani">
+                            <img src="~/images/MenuCizgileri.png" border="0" alt="" title="">
+                        </div>
+                    </div>
+                </div>
+                <div id="HeaderMenuAcmaButonuMenuSinirlamaAlani" style="display:none;">
+                    <div id="HeaderMenuAcmaButonuMenu">
+                        <ul id="HeaderMenuAcmaButonuMenuSeceneklerAlani">
+                            <li class="HeaderMenuAcmaButonuMenuSecenekleri"><a asp-action="Anasayfa" asp-controller="Home">Anasayfa</a></li>
+                            <li class="HeaderMenuAcmaButonuMenuSecenekleri"><a asp-action="Hakkimizda" asp-controller="Home">Hakkımızda</a></li>
+                            <li class="HeaderMenuAcmaButonuMenuSecenekleri"><a asp-action="Index" asp-controller="Book">Kitap</a></li>
+                            <li class="HeaderMenuAcmaButonuMenuSecenekleri"><a asp-action="Index" asp-controller="Category">Kategori</a></li>
+                            <li class="HeaderMenuAcmaButonuMenuSecenekleri"><a asp-action="Index" asp-controller="Author">Yazar</a></li>
+                            <li class="HeaderMenuAcmaButonuMenuSecenekleri"><a asp-page="/contact">İletişim</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        @*<partial name="_Notification"/>*@
+        <main  role="main" >
+            @RenderBody()
+        </main>
+        <footer style="z-index:1;">
+            <div id="FooterMenulerAlani">
+                <div id="FooterMenulerSinirlamaAlani">
+                    <div class="FooterMenuleriSutunlarAlani">
+                        <div class="FooterMenuleriSutunlariBaslikAlani">Kurumsal</div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Anasayfa" asp-controller="Home">Anasayfa</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Hakkimizda" asp-controller="Home">Hakkımızda</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Index" asp-controller="Book">Kitap</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Index" asp-controller="Category">Kategori</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Index" asp-controller="Author">Yazar</a></div>
+				    </div>
+                
+                    <div class="FooterMenuleriSutunlarAlani">
+                        <div class="FooterMenuleriSutunlariBaslikAlani">Üyelik & Hizmetler</div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Index" asp-controller="Loan" asp-area="User">Hesabım</a></div>
+				            <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Logout" asp-controller="Account">Çıkış Yap</a></div>
+                        }
+                        else
+                        {
+                            <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Index" asp-controller="Home">Giriş Yap</a></div>
+				            <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-action="Register" asp-controller="Account">Üye Ol</a></div>
+                        }
+                        <div class="FooterMenuleriSutunlariMenulerAlani"><a asp-page="/contact">İletişim</a></div>
+			        </div>
+                    <div class="FooterMenuleriSutunlarAlani">
+					    <div class="FooterMenuleriSutunlariBaslikAlani">Bizi Takip Edin</div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a href="https://www.facebook.com" target="_top"><img src="~/images/Facebook16x16.png" border="0" alt="" title="">Facebook</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a href="https://www.twitter.com" target="_top"><img src="~/images/Twitter16x16.png" border="0" alt="" title="">Twitter</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a href="https://www.linkedin.com" target="_top"><img src="~/images/LinkedIn16x16.png" border="0" alt="" title="">LinkedIn</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a href="https://plus.google.com" target="_top"><img src="~/images/GooglePlus16x16.png" border="0" alt="" title="">Google+</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a href="https://www.instagram.com" target="_top"><img src="~/images/Instagram16x16.png" border="0" alt="" title="">Instagram</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a href="https://tr.pinterest.com/" target="_top"><img src="~/images/Pinterest16x16.png" border="0" alt="" title="">Pinterest</a></div>
+					    <div class="FooterMenuleriSutunlariMenulerAlani"><a href="https://www.youtube.com/" target="_top"><img src="~/images/YouTube16x16.png" border="0" alt="" title="">YouTube</a></div>
+				    </div>
+                </div>
+            </div>
+            <div id="FooterAltMetniAlani">
+			    <div id="FooterAltMetniSinirlamaAlani">Copyright &copy; 2023 - 2024 Kütüphane Yönetim Sistemi Her Hakkı Saklıdır.</div>
+		    </div>
+        </footer>
+    </div>
+
+    
+    <script asp-append-version="true" src="~/lib/jquery/jquery.min.js"></script>
+    <script asp-append-version="true" src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" language="javascript" src="~/lib/jquery-3.2.1.js"></script>
+    <script asp-append-version="true" src="~/js/site.js"></script>
+    <script asp-append-version="true" src="~/lib/font-awesome/js/all.min.js"></script>
+
+
+    @await RenderSectionAsync("Scripts",required:false)
+</body>
+
+</html>

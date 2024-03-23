@@ -1,0 +1,12 @@
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\bin\Debug\net6.0\LMS.Entities.deps.json
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\bin\Debug\net6.0\LMS.Entities.dll
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\bin\Debug\net6.0\ref\LMS.Entities.dll
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\bin\Debug\net6.0\LMS.Entities.pdb
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\LMS.Entities.csproj.AssemblyReference.cache
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\LMS.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\LMS.Entities.AssemblyInfoInputs.cache
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\LMS.Entities.AssemblyInfo.cs
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\LMS.Entities.csproj.CoreCompileInputs.cache
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\LMS.Entities.dll
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\ref\LMS.Entities.dll
+C:\Users\ebube\OneDrive\Masaüstü\Bitirme_Projesi\LMS\LMS.Entities\obj\Debug\net6.0\LMS.Entities.pdb

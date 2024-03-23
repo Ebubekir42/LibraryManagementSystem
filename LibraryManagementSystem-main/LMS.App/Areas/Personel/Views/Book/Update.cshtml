@@ -1,0 +1,159 @@
+﻿@model BookDtoForUpdate
+
+
+<div class="text-center">
+        <div class="my-3 text-center" style="font-size:20px; font-weight:bold; background:rgba(200,200,200,0.1); width:240px; margin:0 auto; border-radius:6px; padding:12px; border:solid 1px; ">Güncelleme</div>
+</div>
+
+<form method="post" asp-action="Update">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <input type="hidden" asp-for="BookId" />
+    <input type="hidden" asp-for="Kopya" />
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group my-3" >
+        <label asp-for="CategoryId">Kategori</label>
+        <select data-placeholder="Kategoriyi Seç" class="form-control" asp-items="@ViewBag.Categories" asp-for="CategoryId" id="normalDropDown" >
+        </select>
+    </div>
+    <div class="form-group my-3" >
+        <label asp-for="AuthorIds">Yazar</label>
+        <select data-placeholder="Yazarı Seç" class="form-control" asp-items="@ViewBag.Authors" asp-for="AuthorIds" id="normalDropDown2"  >
+        </select>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Title">Kitap Başlığı</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="ISBN_No">ISBN No</label>
+        <input asp-for="ISBN_No" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayinlayan">Yayınlayan</label>
+        <input asp-for="Yayinlayan" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayin_Yeri">Yayın Yeri</label>
+        <input asp-for="Yayin_Yeri" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayin_Tarihi">Yayın Tarihi</label>
+        <input asp-for="Yayin_Tarihi" class="form-control" placeholder="Ör: Ekim 2021" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Baski">Baskı</label>
+        <input asp-for="Baski" class="form-control" placeholder="Ör: 1.Baskı" />
+    </div>
+     <div class="form-group my-3">
+        <label asp-for="FormatId">Format</label>
+        <select data-placeholder="Formatı Seç" class="form-control" asp-for="FormatId" id="normalDropDown6" >
+            <option>Kitap</option>
+        </select>
+    </div>
+     <div class="form-group my-3">
+        <label asp-for="Sorumlular">Sorumlular</label>
+        <input asp-for="Sorumlular" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="MediaTypeId">Medya Türü</label>
+        <select data-placeholder="Medya Türünü Seç" class="form-control" asp-for="MediaTypeId" id="normalDropDown3" >
+            <option>Aracısız</option>
+        </select>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="CarrierTypeId">Taşıyıcı Türü</label>
+        <select data-placeholder="Taşıyıcı Türünü Seç" class="form-control" asp-for="CarrierTypeId" id="normalDropDown4" >
+            <option>Hacim</option>
+        </select>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="ContentTypeId">İçerik Türü</label>
+        <select data-placeholder="İçerik Türünü Seç" class="form-control" asp-for="ContentTypeId" id="normalDropDown5" >
+            <option>Metin</option>
+        </select>
+    </div>
+     <div class="form-group my-3">
+        <label asp-for="LanguageId">Dil</label>
+        <select data-placeholder="Dili Seç" class="form-control" asp-for="LanguageId" id="normalDropDown7" >
+            <option>Türkçe</option>
+        </select>
+    </div>
+        </div>
+        <div class="col-6">
+           
+    <div class="form-group my-3">
+        <label asp-for="Copyright_Date">Varsa Copyright Tarihi</label>
+        <input asp-for="Copyright_Date" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayin_Gelis_Tarihi">Yayın Geliş Tarihi</label>
+        <input asp-for="Yayin_Gelis_Tarihi" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Series">Seriler</label>
+        <input asp-for="Series" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Subjects">Konular</label>
+        <input asp-for="Subjects" class="form-control" value="Türk Edebiyatı Romanı" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Fiziksel_Nitelik">Fiziksel Nitelik</label>
+        <input asp-for="Fiziksel_Nitelik" class="form-control" placeholder="Örn: 240sayfa 25cm" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Notes">Notlar</label>
+        <input asp-for="Notes" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Summary">Özet</label>
+        <input asp-for="Summary" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Room">Oda</label>
+        <input asp-for="Room" class="form-control" value="3" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Cabinet">Dolap</label>
+        <input asp-for="Cabinet" class="form-control" value="2"/>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Raf">Raf</label>
+        <input asp-for="Raf" class="form-control" value="3"/>
+    </div>
+    <label>Resim</label>
+    <div>
+        <img style="width:200px; height:200px;" src="/images/calikusu.jpg" />
+    </div>
+    <div class="form-group my-3">
+        <input  type="file" src="~/images/calikusu.jpg" class="form-control" />
+    </div>
+    
+        </div>
+    </div>
+    
+
+    <div class="form-group my-3">
+            <button class="btn btn-outline-primary mx-2" type="submit">
+                <i class="fa fa-save"></i>Update
+            </button>
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="fa fa-list"></i>Books
+            </a>
+
+    </div>
+
+</form>
+
+@section Scripts
+{
+    <script>
+        $(function(){
+            $("#normalDropDown").chosen({allow_single_deselect: true,width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+        $(function(){
+            $("#normalDropDown2").chosen({width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+    </script>
+}

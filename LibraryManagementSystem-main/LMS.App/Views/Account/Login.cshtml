@@ -1,0 +1,75 @@
+﻿@model LoginModel
+<div class="TamSayfaCerceveAlani">
+    <div class="TamSayfaCerceveSinirlamaAlani">
+        <div class="LoginSinirlamaAlani">
+            <div id="LoginGirisiResmi"><i class="fa-solid fa-right-to-bracket"></i></div>
+            <div id="LoginGirisiUstBaslikMetni">Kullanıcı Girişi</div>
+            <div id="LoginGirisiDikkatMetni" class="" asp-validation-summary="All"></div> 
+            <form method="post" asp-action="Login">
+                <input type="hidden" asp-for="ReturnUrl" />
+
+                <div class="form-group my-3">
+                    <label asp-for="IdentityNumber">T.C. Kimlik No</label>
+                    <input asp-for="IdentityNumber" class="form-control" />
+                </div>
+
+                <div class="form-group my-3">
+                    <label asp-for="Password">Şifre</label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                </div>
+
+                <div class="form-group my-3 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Giriş Yap
+                    </button>
+                </div>
+            </form>
+            <div id="LoginGirisiRegisterMetni">
+                Hesabınız yoksa kayıt sayfasına ulaşmak için lütfen <a asp-action="Register">buraya tıklayın. </a>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="text-center my-5">
+    
+    <h6 class="display-6">
+        <i class="fa-solid text-white fa-right-to-bracket bg-secondary p-3 rounded-5"></i>
+        <br />
+        Giriş Yap
+    </h6>
+</div>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div>
+            <div class="text-danger" asp-validation-summary="All"></div>
+        </div>
+        <form method="post" asp-action="Login">
+            <input type="hidden" asp-for="ReturnUrl" />
+
+            <div class="form-group my-3">
+                <label asp-for="IdentityNumber">T.C. Kimlik No</label>
+                <input asp-for="IdentityNumber" class="form-control" />
+            </div>
+
+            <div class="form-group my-3">
+                <label asp-for="Password">Şifre</label>
+                <input type="password" asp-for="Password" class="form-control" />
+            </div>
+
+            <div class="form-group my-3 d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Giriş Yap
+                </button>
+            </div>
+        </form>
+
+        <div>
+            Hesabınız yoksa kayıt sayfasına ulaşmak için lütfen <a asp-action="Register">buraya tıklayın. </a>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>*@

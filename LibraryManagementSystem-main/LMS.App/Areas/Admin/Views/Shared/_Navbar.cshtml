@@ -1,0 +1,105 @@
+﻿@*<nav class="navbar bg-dark border-bottom navbar-expand-lg bg-body-secondary">  
+  <div class="container">
+    <a class="navbar-brand text-white" href="/">Admin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between" id="navbarNavAltMarkup">
+      <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" asp-controller="Book" asp-action="Index">Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" asp-controller="Category" asp-action="Index">Categories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" asp-controller="Author" asp-action="Index">Authors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" asp-controller="User" asp-action="Index">Users</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a target="_blank" class="nav-link text-white" aria-current="page" asp-area="" asp-controller="Home"
+            asp-action="Index">
+            <i class="fa fa-solid fa-search"></i>
+            Web</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-current="page" asp-area="" asp-controller="Account"
+            asp-action="Logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+            </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>*@
+@*<nav class="navbar navbar-expand-md bg-body-secondary mb-3">
+    <div class="container">
+        <a class="navbar-brand" asp-controller="Dashboard" asp-action="Index">Admin</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse d-md-flex justify-content-between" id="navbarNav">
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Book" asp-action="Index">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Author" asp-action="Index">Authors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="User" asp-action="Index">Users</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item"> 
+                    <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Logout" asp-area="">
+                        <i class="fa-solid fa-right-from-bracket"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>*@
+<div style="padding:11px; color:white;">
+    <div style="font-size:18px;" class="navbarItem">Menü</div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Index" asp-controller="Info">Bilgilerim</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Update" asp-controller="Info">Şifreyi Değiştir</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-controller="User" asp-action="Index">Kullanıcı</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Index" asp-controller="Book">Kitap</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Index" asp-controller="Author">Yazar</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Index" asp-controller="Category">Kategori</a>
+    </div>
+    <div class="navbarItem">
+        <a class="navbarLink" asp-action="Logout" asp-controller="Account" asp-area="">Çıkış Yap</a>
+    </div>
+</div>

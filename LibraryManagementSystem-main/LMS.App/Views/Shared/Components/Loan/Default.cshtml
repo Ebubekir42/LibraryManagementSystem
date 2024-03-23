@@ -1,0 +1,141 @@
+﻿@model UserBook
+
+@foreach(var book in Model.Model.Books)
+            {
+                <div class="col-sm-12 col-md-4 my-2">
+                    <div class="card">
+                        <img class="card-img-top p-4" src="~/images/calikusu.jpg" style="height:150px;">
+                        <div class="card-body text-center">
+                            <div class="card-title" style="font-size:14px; font-weight:bold;">@book.Title</div>
+                            <table class="table table-sm text-start">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-muted small">Ödünç Sayısı:</td>
+                                        <td>@await Component.InvokeAsync("BookLoan",arguments:@book.BookId)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-muted small">Durum:</td>
+                                        <td>@await Component.InvokeAsync("BookCase",arguments:@book.BookId)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-primary rounded-1 ayrintiBtn" style="font-size:12px;">Ayrıntı</button>
+
+                                <div class="info-modal customModal">
+                                    <div class="info-modal-content">
+                                        <span class="info-close closeModalBtn" >&times;</span>
+                                        <div>
+                                            <table class="table table-sm text-start" style="font-size:13px;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-muted small">Başlık</td>
+                                                        <td>@book.Title</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted small">ISBN No</td>
+                                                        <td>@book.ISBN_No</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted small">Yayınlayan</td>
+                                                        <td>@book.Yayinlayan</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted small">Yayın Yeri</td>
+                                                        <td>@book.Yayin_Yeri</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted small">Yayın Tarihi</td>
+                                                        <td>@book.Yayin_Tarihi</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted small">Baskı</td>
+                                                        <td>@book.Baski</td>
+                                                    </tr>
+                                                    <tr book="@book" book-info=""></tr>
+                                                    <tr book="@book" book-category=""></tr>
+                                                    <tr>
+                                                        <td class="text-muted small">Sayfa No</td>
+                                                        <td>@book.Fiziksel_Nitelik</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted small">Kopya</td>
+                                                        <td>@book.Kopya</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted small">Ödünç Sayısı</td>
+                                                        <td>@await Component.InvokeAsync("BookLoan",arguments:@book.BookId)</td>
+                                                    </tr>
+                                                    <tr book="@book" book-loan=""></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+
+                                                @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                     <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                </form>*@
+                                                <a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="@book.BookId" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>
+                                            }
+                                            else
+                                            {   
+                                                <div class="loan-button">
+                                                    <button class="btn btn-outline-primary rounded-1 float-end openModalLogin" style="font-size:13px;">Ödünç Al</button>
+                                                </div>
+                                                <div class="info-modal loginModal">
+                                                    <div class="info-modal-content">
+                                                        <span class="info-close closeModalLogin">&times;</span>
+                                                        <div class="loan-title">
+                                                            Giriş Yap
+                                                        </div>
+                                                        <div class="loan-context">
+                                                            Kitap almak için oturumu açmalısınız.
+                                                        </div>
+                                                        <div class="loan-footer">
+                                                            <form method="get" asp-action="Login" asp-controller="Account" asp-area="">
+                                                                <input type="hidden" name="returnUrl" value="/book"/>
+                                                                <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                        <button type="submit" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                    </form>*@
+                                    <a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="@book.BookId" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-outline-primary rounded-1 mx-1 openModalLogin_ oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                    <div class="info-modal loginModal_">
+                                                    <div class="info-modal-content">
+                                                        <span class="info-close closeModalLogin_" >&times;</span>
+                                                        <div class="loan-title">
+                                                            Giriş Yap
+                                                        </div>
+                                                        <div class="loan-context">
+                                                            Kitap almak için oturumu açmalısınız.
+                                                        </div>
+                                                        <div class="loan-footer">
+                                                            <form method="get" asp-action="Login" asp-controller="Account" asp-area="">
+                                                                <input type="hidden" name="returnUrl" value="/book"/>
+                                                                <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                }
+                            </div>
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,194 @@
+﻿@model BookDtoForInsertion
+
+<div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Ekleme
+                </div>
+            </div>
+
+<form method="post" asp-action="Create" style="font-size:12px;" enctype="multipart/form-data">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="row" style="text-align:left;">
+    <div class="col-6">
+         <div class="form-group my-3">
+        <label asp-for="FormatId">Format</label>
+        <select data-placeholder="Formatı Seç" class="form-control" asp-items="@ViewBag.Formats" asp-for="FormatId" id="normalDropDown6" >
+        </select>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Title">Kitap Başlığı</label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group my-3" >
+        <label asp-for="AuthorIds">Yazar</label>
+        <select data-placeholder="Yazarı Seç" class="form-control" asp-items="@ViewBag.Authors" asp-for="AuthorIds" id="normalDropDown2"  >
+        </select>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Sorumlular">Sorumlular</label>
+        <input asp-for="Sorumlular" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="MediaTypeId">Medya Türü</label>
+        <select data-placeholder="Medya Türünü Seç" class="form-control" asp-items="@ViewBag.MediaTypes" asp-for="MediaTypeId" id="normalDropDown3" >
+        </select>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="CarrierTypeId">Taşıyıcı Türü</label>
+        <select data-placeholder="Taşıyıcı Türünü Seç" class="form-control" asp-items="@ViewBag.CarrierTypes" asp-for="CarrierTypeId" id="normalDropDown4" >
+        </select>
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="ContentTypeId">İçerik Türü</label>
+        <select data-placeholder="İçerik Türünü Seç" class="form-control" asp-items="@ViewBag.ContentTypes" asp-for="ContentTypeId" id="normalDropDown5" >
+        </select>
+    </div>
+     <div class="form-group my-3">
+        <label asp-for="LanguageId">Dil</label>
+        <select data-placeholder="Dili Seç" class="form-control" asp-items="@ViewBag.Languages" asp-for="LanguageId" id="normalDropDown7" >
+        </select>
+    </div>
+    <div class="form-group my-3" >
+        <label asp-for="CategoryId">Kategori</label>
+        <select data-placeholder="Kategoriyi Seç" class="form-control" asp-items="@ViewBag.Categories" asp-for="CategoryId" id="normalDropDown" >
+        </select>
+    </div>
+    
+    
+    <div class="form-group my-3">
+        <label asp-for="ISBN_No">ISBN No</label>
+        <input asp-for="ISBN_No" placeholder="Örn: 9855467895223" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayinlayan">Yayınlayan</label>
+        <input asp-for="Yayinlayan" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayin_Yeri">Yayın Yeri</label>
+        <input asp-for="Yayin_Yeri" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayin_Tarihi">Yayın Tarihi</label>
+        <input asp-for="Yayin_Tarihi" class="form-control" />
+    </div>
+    </div>
+    <div class="col-6">
+       
+    
+    <div class="form-group my-3">
+        <label asp-for="CopyRightDate">Varsa Copyright Tarihi</label>
+        <input asp-for="CopyRightDate" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Yayın_Gelis_Tarihi">Yayın Geliş Tarihi</label>
+        <input asp-for="Yayın_Gelis_Tarihi" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Baski">Baskı</label>
+        <input asp-for="Baski" class="form-control" placeholder="Ör: 1.Baskı" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Konular">Konular</label>
+        <input asp-for="Konular" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Fiziksel_Nitelik">Fiziksel Nitelik</label>
+        <input asp-for="Fiziksel_Nitelik" class="form-control" placeholder="Örn: 240sayfa 25cm" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Notes">Notlar</label>
+        <input asp-for="Notes" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Summary">Özet</label>
+        <input asp-for="Summary" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Oda">Oda</label>
+        <input asp-for="Oda" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Dolap">Dolap</label>
+        <input asp-for="Dolap" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Raf">Raf</label>
+        <input asp-for="Raf" class="form-control" />
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Resim">Resim</label>
+        <input type="file" name="file" class="form-control" />
+    </div>
+    </div>
+   </div>
+    
+    <div style="margin-top:13px;" class="ButonlarIcinKapsamaAlani"><input type="submit" value="Ekle" class="FormElemanlariYesilButonlar" tabindex="6"></div>
+    <@*div class="form-group my-3">
+
+            <button class="btn btn-outline-primary mx-2" type="submit">
+                <i class="fa fa-save"></i>Save
+            </button>
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="fa fa-list"></i>Books
+            </a>
+
+    </div>*@
+
+</form>
+
+@section Scripts
+{
+    <script>
+        $(function(){
+            $("#normalDropDown").chosen({allow_single_deselect: true,width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+        $(function(){
+            $("#normalDropDown2").chosen({width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+        $(function(){
+            $("#normalDropDown3").chosen({width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+            $("#normalDropDown3").change(function () {
+                // Seçilen değeri alın
+                var selectedValue = $(this).val();
+                saveScrollPosition();
+                // Yeni URL'yi oluşturun
+                var newUrl = window.location.origin + window.location.pathname + "?MediaType=" + selectedValue;
+
+                // Yeni URL'yi tarayıcıda gösterin
+                window.location.href = newUrl;
+            });
+        });
+        $(function(){
+            $("#normalDropDown4").chosen({width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+        $(function(){
+            $("#normalDropDown5").chosen({width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+        $(function(){
+            $("#normalDropDown6").chosen({width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+        $(function(){
+            $("#normalDropDown7").chosen({width:"100%",no_results_text: "Hiç bir şey bulunmadı!"});
+        });
+        window.onload = function () {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        };
+
+        // Radio buton seçildiğinde veya form gönderildiğinde scroll pozisyonunu kaydet
+        function saveScrollPosition() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        }
+        window.onload = function () {
+            var scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition !== null) {
+                window.scrollTo(0, scrollPosition);
+                sessionStorage.removeItem('scrollPosition'); // Tek seferlik kullanıldığı için silebilirsiniz
+            }
+        };
+    </script>
+    <script>
+
+    });
+    </script>
+
+}

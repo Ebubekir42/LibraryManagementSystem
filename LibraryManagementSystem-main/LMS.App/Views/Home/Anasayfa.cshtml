@@ -1,0 +1,2245 @@
+﻿@model AnasayfaBook
+<div class="SlaytAlaniKapsayicisi">
+	<ul class="SlaytAlaniResimleri">
+		<li class="SlaytResmi"><img src="~/images/slayt1.png" border="0" alt="" title=""></li>
+		<li class="SlaytResmi"><img src="~/images/slayt2.png" border="0" alt="" title=""></li>
+	</ul>
+</div>
+@if(TempData["info"] is not null)
+        {
+            <div class="info-modal customModal" style="display:block;">
+                <div class="info-modal-content" style="width:382px; background:rgb(255,0,0); color:white;">
+                    <span style="position:relative; top:-25px"; class="info-close closeModalBtn" >&times;</span>
+                        @TempData["info"]
+                </div>
+            </div>
+        }
+<div id="TamSayfaYeniUrunlerAlani">
+	<div id="TamSayfaYeniUrunlerBaslikAlani">Yeni Kitaplar</div>
+	<div id="TamSayfaYeniUrunlerDengelemeAlani">
+		<div id="TamSayfaYeniUrunBir" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.Books[0].Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.Books[0].Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.Books[0].BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.Books[0].BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.Books[0].FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.Books[0].Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.Books[0].ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.Books[0].Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.Books[0].Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.Books[0].Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.Books[0].Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[0].CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.Books[0].CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.Books[0].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.Books[0].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.Books[0].ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.Books[0].LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.Books[0].Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[0]" book-info=""></tr>
+                                                        @if(Model.Books[0].Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.Books[0].Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.Books[0]" book-category=""></tr>
+                                                        @if(Model.Books[0].Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[0].Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[0].Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(@Model.Books[0].Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.Books[0].Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.Books[0].Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.Books[0].BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[0]" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.Books[0].Oda / @Model.Books[0].Dolap / @Model.Books[0].Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[0].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="@Model.Books[0].BookId" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[0].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button class=" FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+			@*<div class="ButonlarIcinKapsamaAlani">
+				<a href="#" class="FormElemanlariSariButonlar">Ayrıntı</a>
+				<a href="#" class="FormElemanlariYesilButonlar">Ödünç Al</a>
+			</div>*@
+		</div>
+		<div id="TamSayfaYeniUrunIki" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.Books[1].Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.Books[1].Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.Books[1].BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.Books[1].BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.Books[1].FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.Books[1].Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.Books[1].ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.Books[1].Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.Books[1].Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.Books[1].Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.Books[1].Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[1].CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.Books[0].CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.Books[1].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.Books[1].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.Books[1].ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.Books[1].LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.Books[1].Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[1]" book-info=""></tr>
+                                                        @if(Model.Books[1].Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.Books[1].Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.Books[1]" book-category=""></tr>
+                                                        @if(Model.Books[1].Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[1].Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[1].Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[1].Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.Books[1].Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.Books[1].Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.Books[1].BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[1]" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.Books[1].Oda / @Model.Books[1].Dolap / @Model.Books[1].Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[1].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[1].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button  class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+		<div id="TamSayfaYeniUrunUc" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.Books[2].Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.Books[2].Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.Books[2].BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.Books[2].BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.Books[2].FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.Books[2].Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.Books[2].ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.Books[2].Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.Books[2].Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.Books[2].Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.Books[2].Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[2].CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.Books[0].CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.Books[2].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.Books[2].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.Books[2].ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.Books[2].LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.Books[2].Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[2]" book-info=""></tr>
+                                                        @if(Model.Books[2].Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.Books[2].Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.Books[2]" book-category=""></tr>
+                                                        @if(Model.Books[2].Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[2].Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[2].Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[2].Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.Books[2].Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.Books[2].Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.Books[2].BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[2]" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.Books[2].Oda / @Model.Books[2].Dolap / @Model.Books[2].Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[2].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[2].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+		<div id="TamSayfaYeniUrunDort" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.Books[3].Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.Books[3].Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.Books[3].BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.Books[3].BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.Books[3].FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.Books[3].Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.Books[3].ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.Books[3].Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.Books[3].Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.Books[3].Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.Books[3].Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[3].CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.Books[0].CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.Books[3].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.Books[3].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.Books[3].ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.Books[3].LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.Books[3].Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[3]" book-info=""></tr>
+                                                        @if(Model.Books[3].Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.Books[3].Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.Books[3]" book-category=""></tr>
+                                                        @if(Model.Books[3].Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[3].Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[3].Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[3].Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.Books[3].Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.Books[3].Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.Books[3].BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[3]" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.Books[3].Oda / @Model.Books[3].Dolap / @Model.Books[3].Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[3].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[3].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma " >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+		<div id="TamSayfaYeniUrunBes" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.Books[4].Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.Books[4].Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.Books[4].BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.Books[4].BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+		    <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.Books[4].FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.Books[4].Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.Books[4].ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.Books[4].Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.Books[4].Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.Books[4].Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.Books[4].Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[4].CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.Books[0].CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.Books[4].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.Books[4].CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.Books[4].ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.Books[4].LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.Books[4].Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[4]" book-info=""></tr>
+                                                        @if(Model.Books[4].Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.Books[4].Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.Books[4]" book-category=""></tr>
+                                                        @if(Model.Books[4].Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[4].Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[4].Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.Books[4].Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.Books[4].Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.Books[4].Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.Books[4].BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.Books[4]" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.Books[4].Oda / @Model.Books[4].Dolap / @Model.Books[4].Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[4].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.Books[4].BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+	</div>
+</div>
+<div id="TamSayfaYeniUrunlerAlani">
+	<div id="TamSayfaYeniUrunlerBaslikAlani">Çok Ödünç Alınan Kitaplar</div>
+	<div id="TamSayfaYeniUrunlerDengelemeAlani">
+		
+        <div id="TamSayfaYeniUrunBir_" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.BookOduncSayisilar[0].Book.Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.BookOduncSayisilar[0].Book.Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[0].Book.BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.BookOduncSayisilar[0].Book.BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.BookOduncSayisilar[0].Book.FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.BookOduncSayisilar[0].Book.Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[0].Book.CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.BookOduncSayisilar[0].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.BookOduncSayisilar[0].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.BookOduncSayisilar[0].Book.ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.BookOduncSayisilar[0].Book.LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[0].Book" book-info=""></tr>
+                                                        @if(Model.BookOduncSayisilar[0].Book.Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.BookOduncSayisilar[0].Book.Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.BookOduncSayisilar[0].Book" book-category=""></tr>
+                                                        @if(Model.BookOduncSayisilar[0].Book.Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[0].Book.Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[0].Book.Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[0].Book.Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.BookOduncSayisilar[0].Book.Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[0].Book.BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[0].Book" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.Oda / @Model.BookOduncSayisilar[0].Book.Dolap / @Model.BookOduncSayisilar[0].Book.Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[0].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[0].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+		<div id="TamSayfaYeniUrunIki_" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.BookOduncSayisilar[1].Book.Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.BookOduncSayisilar[1].Book.Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[1].Book.BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.BookOduncSayisilar[1].Book.BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.BookOduncSayisilar[1].Book.FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.BookOduncSayisilar[1].Book.Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[1].Book.CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.BookOduncSayisilar[1].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.BookOduncSayisilar[1].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.BookOduncSayisilar[1].Book.ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.BookOduncSayisilar[1].Book.LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[1].Book" book-info=""></tr>
+                                                        @if(Model.BookOduncSayisilar[1].Book.Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.BookOduncSayisilar[1].Book.Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.BookOduncSayisilar[1].Book" book-category=""></tr>
+                                                        @if(Model.BookOduncSayisilar[1].Book.Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[1].Book.Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[1].Book.Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[1].Book.Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.BookOduncSayisilar[1].Book.Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[1].Book.BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[1].Book" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.BookOduncSayisilar[1].Book.Oda / @Model.BookOduncSayisilar[1].Book.Dolap / @Model.BookOduncSayisilar[1].Book.Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                { 
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[1].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[1].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+		<div id="TamSayfaYeniUrunUc_" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.BookOduncSayisilar[2].Book.Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.BookOduncSayisilar[2].Book.Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[2].Book.BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.BookOduncSayisilar[2].Book.BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.BookOduncSayisilar[2].Book.FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.BookOduncSayisilar[2].Book.Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[2].Book.CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.BookOduncSayisilar[2].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.BookOduncSayisilar[2].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.BookOduncSayisilar[2].Book.ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.BookOduncSayisilar[2].Book.LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[2].Book" book-info=""></tr>
+                                                        @if(Model.BookOduncSayisilar[2].Book.Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.BookOduncSayisilar[2].Book.Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.BookOduncSayisilar[2].Book" book-category=""></tr>
+                                                        @if(Model.BookOduncSayisilar[2].Book.Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[2].Book.Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[2].Book.Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[2].Book.Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.BookOduncSayisilar[2].Book.Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[2].Book.BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[2].Book" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.BookOduncSayisilar[2].Book.Oda / @Model.BookOduncSayisilar[2].Book.Dolap / @Model.BookOduncSayisilar[2].Book.Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[2].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[2].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+		<div id="TamSayfaYeniUrunDort_" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.BookOduncSayisilar[3].Book.Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.BookOduncSayisilar[3].Book.Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[3].Book.BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.BookOduncSayisilar[3].Book.BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.BookOduncSayisilar[3].Book.FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.BookOduncSayisilar[3].Book.Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[3].Book.CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.BookOduncSayisilar[3].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.BookOduncSayisilar[3].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.BookOduncSayisilar[3].Book.ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.BookOduncSayisilar[3].Book.LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[3].Book" book-info=""></tr>
+                                                        @if(Model.BookOduncSayisilar[3].Book.Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.BookOduncSayisilar[3].Book.Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.BookOduncSayisilar[3].Book" book-category=""></tr>
+                                                        @if(Model.BookOduncSayisilar[3].Book.Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[3].Book.Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[3].Book.Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[3].Book.Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.BookOduncSayisilar[3].Book.Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[3].Book.BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[3].Book" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.BookOduncSayisilar[3].Book.Oda / @Model.BookOduncSayisilar[3].Book.Dolap / @Model.BookOduncSayisilar[3].Book.Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[3].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[3].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+		<div id="TamSayfaYeniUrunBes_" class="TamSayfaYeniUrunSinirlamaAlani">
+			<div class="TamSayfaYeniUrunResmiDisCercevesi">
+				<img src="@Model.BookOduncSayisilar[4].Book.Resim" border="0"/>
+			</div>
+			<div class="TamSayfaYeniUrunUstBaslikMetni">@Model.BookOduncSayisilar[4].Book.Title</div>
+			<table class="TamSayfaCerceveAlaniIciBankaHesabiTablosu" width:"100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Ödünç Sayısı</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu">@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[4].Book.BookId)</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuBaslikMetniSutunu">Durum</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuNoktaMetniSutunu">:</td>
+						<td align="left" valign="top" class="TamSayfaCerceveAlaniIciBankaHesabiTablosuIcerikMetniSutunu rafta">@await Component.InvokeAsync("BookDurum",Model.BookOduncSayisilar[4].Book.BookId)</td>
+					</tr>
+				</tbody>
+			</table>
+            <div class="ButonlarIcinKapsamaAlani">
+				                <button class="FormElemanlariSariButonlar ayrintiBtn">Ayrıntı</button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",Model.BookOduncSayisilar[4].Book.FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(Model.BookOduncSayisilar[4].Book.Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@Model.Books[0].Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[4].Book.CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@Model.BookOduncSayisilar[0].Book.CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",Model.BookOduncSayisilar[4].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",Model.BookOduncSayisilar[4].Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",Model.BookOduncSayisilar[4].Book.ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",Model.BookOduncSayisilar[4].Book.LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.Baski</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[4].Book" book-info=""></tr>
+                                                        @if(Model.BookOduncSayisilar[4].Book.Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@Model.BookOduncSayisilar[4].Book.Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@Model.BookOduncSayisilar[4].Book" book-category=""></tr>
+                                                        @if(Model.BookOduncSayisilar[4].Book.Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@Model.Books[0].Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[4].Book.Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@Model.Books[0].Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[4].Book.Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@Model.Books[0].Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(Model.BookOduncSayisilar[4].Book.Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@Model.BookOduncSayisilar[4].Book.Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",Model.BookOduncSayisilar[4].Book.BookId)</td>
+                                                        </tr>
+                                                        <tr book="@Model.BookOduncSayisilar[4].Book" book-loan=""></tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@Model.BookOduncSayisilar[4].Book.Oda / @Model.BookOduncSayisilar[4].Book.Dolap / @Model.BookOduncSayisilar[4].Book.Raf</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form style="height:40px;">
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[4].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="btn btn-outline-primary rounded-1 float-end oduncAlma" style="font-size:13px;">Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                                    <div class="loan-button">
+                                                        <button class="btn btn-outline-primary rounded-1 float-end openModalLogin oduncAlma" style="font-size:13px;">Ödünç Al</button>
+                                                    </div>
+                                                    <div class="info-modal loginModal">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin_">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+				                @*<button href="#" class="FormElemanlariYesilButonlar">Ödünç Al</button>*@
+                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <form class="Kitapformu"> 
+                                                        <input type="hidden" name="bookId" value="@Model.BookOduncSayisilar[4].Book.BookId" />
+                                                        <button asp-action="Create" asp-controller="Order" asp-area=""  class="FormElemanlariYesilButonlar oduncAlma" >Ödünç Al</button>   
+                                                    </form>
+                                                    @*<form method="get" asp-action="Create" asp-controller="Order" asp-area="">
+                                                         <button class="btn btn-outline-primary rounded-1 mx-1 oduncAlma">Ödünç Al</button>
+                                                    </form>*@
+                                                    @*<a asp-action="Create" asp-controller="Order" asp-area="" asp-route-bookId="1" class="btn btn-outline-primary rounded-1 mx-1 oduncAlma" style="font-size:13px;">Ödünç Al</a>*@
+                                                }
+                                                else
+                                                {   
+                                            
+                                                        <button href="#" class="FormElemanlariYesilButonlar openModalLogin_ oduncAlma">Ödünç Al</button>
+                                             
+                                                    <div class="info-modal loginModal_">
+                                                        <div class="info-modal-content">
+                                                            <span class="info-close closeModalLogin__">&times;</span>
+                                                            <div class="loan-title">
+                                                                Giriş Yap
+                                                            </div>
+                                                            <div class="loan-context">
+                                                                Kitap almak için oturumu açmalısınız.
+                                                            </div>
+                                                            <div class="loan-footer">
+                                                                <form method="get" asp-action="Index" asp-controller="Home" asp-area="">
+                                                                    <input type="hidden" name="url" value="user"/>
+                                                                    <button type="submit" class="btn btn-outline-primary rounded-1 float-end" style="font-size:13px;">Giriş Yap</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+			                </div>
+		</div>
+	</div>
+</div>
+
+@section Scripts{
+    <script>
+    var ayrintiBtn = document.querySelectorAll(".ayrintiBtn");
+    var customModal = document.querySelectorAll(".customModal");
+    var closeModalBtn = document.querySelectorAll(".closeModalBtn");
+    ayrintiBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "block";
+        });
+    });
+    closeModalBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "none";
+        });
+    });
+    window.addEventListener("click",function(event){
+        customModal.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+        loginModal.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+        loginModal_.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+    });
+
+
+
+    var openModalLogin = document.querySelectorAll(".openModalLogin");
+    var loginModal = document.querySelectorAll(".loginModal");
+    var closeModalLogin_ = document.querySelectorAll(".closeModalLogin_");
+    openModalLogin.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal[index].style.display = "block";
+        });
+    });
+    closeModalLogin_.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal[index].style.display = "none";
+        });
+    });
+
+    var openModalLogin_ = document.querySelectorAll(".openModalLogin_");
+    var loginModal_ = document.querySelectorAll(".loginModal_");
+    var closeModalLogin__ = document.querySelectorAll(".closeModalLogin__");
+    openModalLogin_.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal_[index].style.display = "block";
+        });
+    });
+    closeModalLogin__.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            loginModal_[index].style.display = "none";
+        });
+    });
+
+    var oduncAlmalar = document.getElementsByClassName("oduncAlma");
+    var raftalar = document.getElementsByClassName("rafta");
+    for(var  i= 0; i < raftalar.length; i++){
+        if(raftalar[i].textContent == "Rafta Değil"){
+            oduncAlmalar[2*i].disabled = true;
+            oduncAlmalar[2*i + 1].disabled = true;
+        }
+    }
+    </script>
+}

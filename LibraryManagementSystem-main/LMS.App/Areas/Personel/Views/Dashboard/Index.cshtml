@@ -1,0 +1,141 @@
+﻿<div class="TamSayfaCerceveAlaniIciAltiCizgiliKategoriAlani">
+                            <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniKategoriMetni">
+                                Dashboard
+                            </div>
+                        </div>
+                        <div class="DashboardAlani">
+                            <div class="dashboardKutu">
+        <div>Kitap Sayısı</div>
+        <div class="DashboradSayi">@await Component.InvokeAsync("BookNumber")</div>
+        @*<div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+            <div><button class="btn btn-outline-primary rounded-1">Ekle</button></div>
+        </div>*@
+        <div class="ButonlarIcinKapsamaAlani">
+				            <a asp-action="Index" asp-controller="Book" class="FormElemanlariSariButonlar">Listele</a>
+				            <a asp-action="Create" asp-controller="Book" class="FormElemanlariYesilButonlar">Ekle</a>
+			            </div>
+    </div>
+
+
+    <div class="dashboardKutu">
+        <div>Üye Sayısı</div>
+        <div class="DashboradSayi">@await Component.InvokeAsync("UserNumber")</div>
+        @*<div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+            <div><button class="btn btn-outline-primary rounded-1">Ekle</button></div>
+        </div>*@
+        <div class="ButonlarIcinKapsamaAlani">
+				            <a asp-action="Index" asp-controller="User" class="FormElemanlariSariButonlar">Listele</a>
+				            <a asp-action="Create" asp-controller="User" class="FormElemanlariYesilButonlar">Ekle</a>
+			            </div>
+    </div>
+    <div class="dashboardKutu">
+        <div>Ödünç Alınan Kitap Sayısı</div>
+        <div class="DashboradSayi">@await Component.InvokeAsync("LoanBookNumber")</div>
+        @*<div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>*@
+        <div class="ButonlarIcinKapsamaAlani">
+				            <a asp-action="LoanNumber" asp-controller="Info" class="FormElemanlariSariButonlar">Listele</a>
+				            @*<a href="#" class="FormElemanlariYesilButonlar">Ekle</a>*@
+			            </div>
+    </div>
+    <div class="dashboardKutu">
+        <div >Kütüphaneden Alınan Kitap Sayısı</div>
+        <div class="DashboradSayi">@await Component.InvokeAsync("NonOrderNumber")</div>
+        @*<div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>*@
+        <div class="ButonlarIcinKapsamaAlani">
+				            <a asp-action="NonOrder" asp-controller="Info" class="FormElemanlariSariButonlar">Listele</a>
+				            @*<a href="#" class="FormElemanlariYesilButonlar">Ekle</a>*@
+			            </div>
+    </div>
+    <div class="dashboardKutu">
+        <div>Kargo İle Alınan Kitap Sayısı</div>
+        <div class="DashboradSayi">@await Component.InvokeAsync("OrderNumber")</div>
+        @*<div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>*@
+        <div class="ButonlarIcinKapsamaAlani">
+				            <a asp-action="Order" asp-controller="Info" class="FormElemanlariSariButonlar">Listele</a>
+				            @*<a href="#" class="FormElemanlariYesilButonlar">Ekle</a>*@
+			            </div>
+    </div>
+    <div class="dashboardKutu">
+        <div>Kayıp Edilen Kitap Sayısı</div>
+        <div class="DashboradSayi">@await Component.InvokeAsync("LossBookNumber")</div>
+        @*<div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>*@
+        <div class="ButonlarIcinKapsamaAlani">
+				            <a asp-action="LossBook" asp-controller="Info" class="FormElemanlariSariButonlar">Listele</a>
+				            @*<a href="#" class="FormElemanlariYesilButonlar">Ekle</a>*@
+			            </div>
+    </div>
+                        </div>
+@*<div class="my-3 text-center" style="font-size:20px; font-weight:bold; background:rgba(200,200,200,0.1); width:240px; margin:0 auto; border-radius:6px; padding:12px; border:solid 1px; ">Dashboard</div>
+
+<div style="margin:20px;">
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Kitap Sayısı</div>
+        <div style="font-size:55px;">50</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+            <div><button class="btn btn-outline-primary rounded-1">Ekle</button></div>
+        </div>
+    </div>
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Personel Sayısı</div>
+        <div style="font-size:55px;">3</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+            <div><button class="btn btn-outline-primary rounded-1">Ekle</button></div>
+        </div>
+    </div>
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Kargo Sayısı</div>
+        <div style="font-size:55px;">2</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+            <div><button class="btn btn-outline-primary rounded-1">Ekle</button></div>
+        </div>
+    </div>
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Üye Sayısı</div>
+        <div style="font-size:55px;">21</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+            <div><button class="btn btn-outline-primary rounded-1">Ekle</button></div>
+        </div>
+    </div>
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Ödünç Alınan Kitap Sayısı</div>
+        <div style="font-size:55px;">13</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>
+    </div>
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Kütüphaneden Alınan Kitap Sayısı</div>
+        <div style="font-size:55px;">9</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>
+    </div>
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Kargo İle Alınan Kitap Sayısı</div>
+        <div style="font-size:55px;">4</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>
+    </div>
+    <div class="dashboardKutu">
+        <div style="font-size:22px;">Kayıp Edilen Kitap Sayısı</div>
+        <div style="font-size:55px;">2</div>
+        <div class="dashboardContent2">
+            <div><button class="btn btn-outline-primary rounded-1">Listele</button></div>
+        </div>
+    </div>
+</div>*@

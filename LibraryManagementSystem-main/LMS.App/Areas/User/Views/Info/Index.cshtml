@@ -1,0 +1,88 @@
+﻿@model ApplicationUser
+<div class="TamSayfaCerceveAlaniUser">
+    <div class="TamSayfaCerceveSinirlamaAlaniUser">
+        <div class="TamSayfaCerceveAlaniIciYuzdeYuzlukAlan">
+            <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Hesabım &#8250; Bilgilerim
+                </div>
+            </div>
+            <div class="TamSayfaCerceveAlaniIciHesapMenuleriAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciHesapMenuleriDengelemeAlaniUser">
+                    <div class="TamSayfaCerceveAlaniIciHesapMenusuSinirlamaAlaniUser">
+                        <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetinAlaniUser">
+                            <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetniUser">
+                                <a asp-action="Index" asp-controller="Loan">Ödünç Aldığım Kitaplar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="TamSayfaCerceveAlaniIciHesapMenusuSinirlamaAlaniUser">
+                        <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetinAlaniUser">
+                            <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetniUser">
+                                <a asp-action="Index" asp-controller="Info">Bilgilerim</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="TamSayfaCerceveAlaniIciHesapMenusuSinirlamaAlaniUser">
+                        <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetinAlaniUser">
+                            <div class="TamSayfaCerceveAlaniIciHesapTumMenulerinMetniUser">
+                                <a  asp-action="Update" asp-controller="Info">Şifre Değiştirme</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="UyelikBilgileriUser" asp-action="Update" asp-controller="User" method="post">
+                <input type="hidden" asp-for="Id" />
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">İsim Soyisim</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.FirstName @Model.LastName</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">TC No</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.IdentityNumber</div>
+			
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">E-Mail Adresi</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Email</div>
+				
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Cep Telefonu</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.PhoneNumber</div>
+				
+				<div class="ButonlarIcinKapsamaAlani"><input type="submit"  value="Bilgilerimi Güncellemek İstiyorum" class="FormElemanlariTuruncuButonlarUser" tabindex="6"></div>
+			</form>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="my-3 text-center" style="font-size:20px; font-weight:bold; background:rgba(200,200,200,0.1); width:240px; margin:0 auto; border-radius:6px; padding:12px; border:solid 1px; ">Bilgilerim</div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="infoKutu">
+            <div class="infoContent">
+                <span>Adı: Ömer Macit</span>
+            </div>
+            <div class="infoContent">
+                <span>Soyadı: Türk</span>
+            </div>
+            <div class="infoContent">
+                <span>TC No: 19046444587</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="infoKutu">
+            <div class="infoContent">
+                <span>Telefon No: 05056315999</span>
+            </div>
+            <div class="infoContent">
+                <span>Email: omermacit_1998@gmail.com</span>
+            </div>
+            <div class="infoContent">
+                <span>Rol: Üye</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-left:23px;">
+    <a  asp-action="Update" asp-route-id="55555554486" asp-controller="User" style="font-size:18px;" class="btn btn-outline-primary">Bilgilerimi Güncelle</a>
+</div>*@

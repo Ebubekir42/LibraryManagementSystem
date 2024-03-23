@@ -1,0 +1,39 @@
+﻿@model UserDtoForInsertion
+
+<div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Ekleme
+                </div>
+            </div>
+<form class="UyelikBilgileriUser" method="post" asp-action="Create">
+                <div class="text-danger" asp-validation-summary="All"></div>
+                @*<input type="hidden" asp-for="Id" />*@
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label asp-for="IdentityNumber">T.C Kimlik No</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input asp-for="IdentityNumber" type="text" class="FormElemanlariTextInputlari" /></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label asp-for="FirstName" >Ad</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input asp-for="FirstName" type="text" class="FormElemanlariTextInputlari" /></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label asp-for="LastName" >Soyad</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input asp-for="LastName" type="text" class="FormElemanlariTextInputlari" /></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label asp-for="Email">E-Mail</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input asp-for="Email" type="email" class="FormElemanlariTextInputlari" /></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label asp-for="PhoneNumber">Telefon No</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input asp-for="PhoneNumber" type="text" class="FormElemanlariTextInputlari" /></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser"><label asp-for="Password">Şifre</label></div>
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariIcinSatirAlaniUser"><input asp-for="Password" type="password" class="FormElemanlariTextInputlari" /></div>
+
+                <div class="TamSayfaCerceveAlaniIciFormElemanlariBaslikMetniUser">Rolünü Seç</div>
+                @foreach(var role in Model.Roles)
+    {
+        <div class="CheckBoxlarveSecenekleriIcinKapsamaAlani">
+							<span class="CheckBoxveSeceneklerKapsamaAlani">
+								<label class="CheckBoxKapsamaAlani">								
+									<input  name="Roles" value="@role" type="checkbox" class="FormElemanlariCheckBoxInputlari">
+									<span class="CheckBoxIcinBicimlendirmeAlani"></span>
+									<span  class="CheckBoxYaniMetinAlani">@role</span>
+								</label>
+							</span>
+						</div>
+    }
+    
+                <div style="margin-top:13px;" class="ButonlarIcinKapsamaAlani"><input type="submit" value="Ekle" class="FormElemanlariYesilButonlar" tabindex="6"></div>
+</form>

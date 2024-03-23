@@ -1,0 +1,24 @@
+﻿@model ApplicationUser
+
+
+<div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Bilgilerim
+                </div>
+            </div>
+<form class="UyelikBilgileriUser" asp-action="Update" asp-controller="User" method="post">
+                <input type="hidden" asp-for="Id" />
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">İsim Soyisim</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.FirstName @Model.LastName</div>
+
+                <div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">TC No</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.IdentityNumber</div>
+			
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">E-Mail Adresi</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.Email</div>
+				
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitBasliklariMetniUser">Cep Telefonu</div>
+				<div class="TamSayfaCerceveAlaniIciUyeliBilgileriSayfasiKayitIcerikleriMetniUser">@Model.PhoneNumber</div>
+				
+				<div class="ButonlarIcinKapsamaAlani"><input type="submit"  value="Bilgilerimi Güncellemek İstiyorum" class="FormElemanlariTuruncuButonlarUser" tabindex="6"></div>
+			</form>

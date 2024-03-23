@@ -1,0 +1,115 @@
+﻿@model AuthorListViewModel
+
+<div class="TamSayfaCerceveAlaniIciAltiCizgiliKategoriAlani">
+                            <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniKategoriMetni">
+                                Yazar
+                            </div>
+                            <div style="float:right;">
+				                <a asp-action="Create" asp-controller="Book" class="FormElemanlariSariButonlar ayrintiBtn">Ekle</a>
+                            </div>
+                        </div>
+<div style="display:block; border-radius:8px; border:solid 1px rgba(0,0,0,0.2); overflow:hidden; margin-left:-9px;">
+
+        <table class="table table-striped table-hover" style="font-size:14px;">
+            <thead>
+                <tr>
+                    <th style="background:#36304a; color:white;">ID</th>
+                    <th style="background:#36304a; color:white;">FirstName</th>
+                    <th style="background:#36304a; color:white;">LastName</th>
+                    <th style="background:#36304a; color:white;">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var author in Model.Authors)
+                {
+                    <tr>
+                        <td>@author.AuthorId</td>
+                        <td>@author.FirstName</td>
+                        <td>@author.LastName</td>
+                        <td>
+                            <div class="btn-group">
+                                <a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-warning"
+                                    asp-action="Update" asp-route-id="@author.AuthorId">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger"
+                                    asp-action="Delete" asp-route-id="@author.AuthorId">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+
+@*
+
+<div class="text-center my-3 border-bottom">
+        <div class="my-3 text-center" style="font-size:20px; font-weight:bold; background:rgba(200,200,200,0.1); width:240px; margin:0 auto; border-radius:6px; padding:12px; border:solid 1px; ">Yazar</div>
+
+</div>
+<div class="text-center">
+    <div class="my-3" style="display:flex; justify-content:space-between;">
+        <div style="display:flex; border:solid 1px black; height:35px; border-radius:7px; overflow:hidden;">
+            <div style="display:flex; align-items:center; overflow:hidden; background:white; width:221px;">
+                <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                <input class="filtreInput" type="text" name="inKategori" placeholder="Yazarı Ara" />
+            </div>
+        </div>
+        <div style="position:relative; right:4px;">
+        <a class="btn btn-outline-primary" asp-action="Create">
+            <i class="fa fa-plus"></i> Ekle
+        </a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+                <div style="display:block; border-radius:8px; border:solid 1px rgba(0,0,0,0.2); overflow:hidden; margin-left:-9px;">
+
+        <table class="table table-striped table-hover" style="font-size:14px;">
+            <thead>
+                <tr>
+                    <th style="background:#36304a; color:white;">ID</th>
+                    <th style="background:#36304a; color:white;">FirstName</th>
+                    <th style="background:#36304a; color:white;">LastName</th>
+                    <th style="background:#36304a; color:white;">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var author in Model.Authors)
+                {
+                    <tr>
+                        <td>@author.AuthorId</td>
+                        <td>@author.FirstName</td>
+                        <td>@author.LastName</td>
+                        <td>
+                            <div class="btn-group">
+                                <a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-warning"
+                                    asp-action="Update" asp-route-id="@author.AuthorId">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger"
+                                    asp-action="Delete" asp-route-id="@author.AuthorId">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+*@
+@section Scripts
+    {
+    <script type="text/javascript">
+        //$(document).ready(() => {
+        //    $('[data-toggle="tooltip"]').tooltip()
+        //});
+    </script>
+}

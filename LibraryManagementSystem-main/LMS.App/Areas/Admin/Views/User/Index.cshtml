@@ -1,0 +1,277 @@
+﻿@model UserListViewModel
+@{
+    int i = 1;
+}
+<div class="TamSayfaCerceveAlaniIciAltiCizgiliKategoriAlani">
+                            <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniKategoriMetni">
+                                Kullanıcı
+                            </div>
+                            <div style="float:right;">
+				                <a asp-action="Create" asp-controller="User" class="FormElemanlariSariButonlar ayrintiBtn">Ekle</a>
+                            </div>
+                        </div>
+
+<div  class="TamSayfaSagSutunIciTableSinirlamaAlaniAdmin"  style="position:relative; top:5px;">
+    <div style="display:block; border:solid 1px rgba(0,0,0,0.2); overflow:hidden; margin-left:-9px;">
+        <table class="table table-striped table-hover" style="font-size:13px;">
+            <thead>
+                <tr>
+                    <th style="width:auto; min-width:30px; background:#36304a; color:white;">ID</th>
+                    <th style="width:auto; min-width:50px; background:#36304a; color:white;">Ad</th>
+                    <th style="width:auto; min-width:80px; background:#36304a; color:white;">Soyad</th>
+                    <th style="width:auto; min-width:40px; background:#36304a; color:white;">Rol</th>
+                    <th style="width:auto; min-width:30px; background:#36304a; color:white;">Ödünç Sayısı</th>
+                    <th style="width:auto; min-width:60px; background:#36304a; color:white;">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach(var user in Model.Users)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td user-name="@user" user-role=""></td>
+                        <td>@await Component.InvokeAsync("LoanUser",user)</td>
+                        <td>
+                            <div class="btn-group">
+                                @*<a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-warning"
+                                    asp-action="Update" asp-route-id="@user.UserName">
+                                    <i class="fa fa-edit"></i>
+                                </a>*@
+                                @if (!user.UserName.Equals("19046446116"))
+                                {
+                                    <a data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger"
+                                        asp-action="Delete" asp-route-id="@user.UserName">
+                                        <i class="fa fa-trash"></i>
+                                    </a>    
+                                }
+                                @*<a data-toggle="tooltip" data-placement="top" title="Detail" class="btn btn-info"
+                                    target="_blank" asp-action="Get" asp-route-id="@user.UserName">
+                                    <i class="fa fa-search"></i>
+                                </a>*@
+                                <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Detail" data-bs-toggle="modal" data-bs-target="#_@user.UserName">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="modal fade" id="_@user.UserName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-user fa-xl" style="color: #4672be;"></i>  Kullanıcı Bilgileri</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                     <div>
+                                                         <table class="table table-sm">
+                                                             <tbody>
+                                                                 <tr>
+                                                                     <td class="text-muted small">Ad</td>
+                                                                     <td>@user.FirstName</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">Soyad</td>
+                                                                     <td>@user.LastName</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">T.C. Kimlik No</td>
+                                                                     <td>@user.IdentityNumber</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">E-Mail</td>
+                                                                     <td>@user.Email</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">Telefon No</td>
+                                                                     <td>@user.PhoneNumber</td>
+                                                                 </tr>
+                                                                 <tr user-name="@user" user-role=""></tr>
+                                                             </tbody>
+                                                         </table>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @if (true)
+                    {
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@*<div class="text-center my-2 border-bottom">
+    <div class="my-3 text-center" style="font-size:20px; font-weight:bold; background:rgba(200,200,200,0.1); width:240px; margin:0 auto; border-radius:6px; padding:12px; border:solid 1px; ">Kullanıcı</div>
+</div>
+<div class="text-center">
+    <div class="my-3" style="display:flex; justify-content:space-between;">
+        <div style="display:flex; border:solid 1px black; height:35px; border-radius:7px; overflow:hidden; position:relative; left:260px;">
+            <div style="display:flex; align-items:center; overflow:hidden; background:white; width:221px;">
+                <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                <input class="filtreInput" type="text" name="inKategori" placeholder="Ad veya Soyadı Ara" />
+            </div>
+        </div>
+        <div style="position:relative; right:4px;">
+        <a class="btn btn-outline-primary" asp-action="Create">
+            <i class="fa fa-plus"></i> Ekle
+        </a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <div style="border:solid 1px rgba(0,0,0,0.2); border-radius:9px;  height:auto; padding:7px;">
+            <div  class="anaAlani">
+                <div class="filtreTitle" >
+                    <div class="titleContent">Kategori</div>
+                    <div class="filtreBtn"><i class="fa-solid fa-caret-down" style="position:absolute; display:none;" ></i><i class="fa-solid fa-caret-up" style="position:absolute; display:inline-block;"></i></div>
+                </div>
+                <div class="filtreAlani" style="display:block;" >
+                    <div class="filtreInputAlani">
+                        <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                        <input class="filtreInput" type="text" name="inKategori" />
+                    </div>
+                    <div>
+                        <div class="filtreLabelAlani" >
+                            
+                                <label class="labelAlani " style="display:flex;">
+                                    <input type="checkbox" name="categoryId"  onchange="changeUrl()"  class="custom-checkbox" />
+                                    <div class="divAlani ">Admin</div>
+                                </label>
+                                <label class="labelAlani " style="display:flex;">
+                                    <input type="checkbox" name="categoryId" onchange="changeUrl()"  class="custom-checkbox" />
+                                    <div class="divAlani ">Personel</div>
+                                </label>
+                                <label class="labelAlani " style="display:flex;">
+                                    <input type="checkbox" name="categoryId"  onchange="changeUrl()"  class="custom-checkbox" />
+                                    <div class="divAlani ">Kargo</div>
+                                </label>
+                                <label class="labelAlani " style="display:flex;">
+                                    <input type="checkbox" name="categoryId"  onchange="changeUrl()"  class="custom-checkbox" />
+                                    <div class="divAlani ">Üye</div>
+                                </label>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <div style="display:block; border-radius:8px; border:solid 1px rgba(0,0,0,0.2); overflow:hidden; margin-left:-9px;">
+
+        <table class="table table-striped table-hover" style="font-size:14px;">
+            <thead>
+                <tr>
+                    <th style="background:#36304a; color:white;">ID</th>
+                    <th style="background:#36304a; color:white;">Ad</th>
+                    <th style="background:#36304a; color:white;">Soyad</th>
+                    <th style="background:#36304a; color:white;">Rol</th>
+                    <th style="background:#36304a; color:white;">Ödünç Sayısı</th>
+                    <th style="background:#36304a; color:white;">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach(var user in Model.Users)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td user-name="@user" user-role=""></td>
+                        <td>@await Component.InvokeAsync("LoanUser",user)</td>
+                        <td>
+                            <div class="btn-group">
+                              
+                                @if (!user.UserName.Equals("19046446116"))
+                                {
+                                    <a data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger"
+                                        asp-action="Delete" asp-route-id="@user.UserName">
+                                        <i class="fa fa-trash"></i>
+                                    </a>    
+                                }
+                            
+                                <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Detail" data-bs-toggle="modal" data-bs-target="#_@user.UserName">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="modal fade" id="_@user.UserName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-user fa-xl" style="color: #4672be;"></i>  Kullanıcı Bilgileri</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                     <div>
+                                                         <table class="table table-sm">
+                                                             <tbody>
+                                                                 <tr>
+                                                                     <td class="text-muted small">Ad</td>
+                                                                     <td>@user.FirstName</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">Soyad</td>
+                                                                     <td>@user.LastName</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">T.C. Kimlik No</td>
+                                                                     <td>@user.IdentityNumber</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">E-Mail</td>
+                                                                     <td>@user.Email</td>
+                                                                 </tr>
+                                                                 <tr>
+                                                                     <td class="text-muted small">Telefon No</td>
+                                                                     <td>@user.PhoneNumber</td>
+                                                                 </tr>
+                                                                 <tr user-name="@user" user-role=""></tr>
+                                                             </tbody>
+                                                         </table>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @if (true)
+                    {
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>*@
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+}

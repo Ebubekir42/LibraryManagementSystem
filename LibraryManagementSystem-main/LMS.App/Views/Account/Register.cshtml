@@ -1,0 +1,50 @@
+﻿@model RegisterDto
+
+<div class="TamSayfaCerceveAlani">
+    <div class="TamSayfaCerceveSinirlamaAlani">
+        <div class="LoginSinirlamaAlani">
+            <div id="RegisterGirisiResmi"><i class="fa-solid fa-user-plus"></i></div>
+            <div id="RegisterGirisiUstBaslikMetni">Kayıt Ol</div>
+            <div id="RegisterGirisiDikkatMetni" class="" asp-validation-summary="All"></div> 
+            <form method="post" asp-action="Register">
+
+                <div class="form-group my-3">
+                    <label asp-for="IdentityNumber">T.C. Kimlik No</label>
+                    <input asp-for="IdentityNumber" class="form-control" />
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="FirstName">Ad</label>
+                    <input asp-for="FirstName" class="form-control" />
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="LastName">Soyad</label>
+                    <input asp-for="LastName" class="form-control" />
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="PhoneNumber">Telefon No</label>
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="example: 05551112222"/>
+                </div>
+                <div class="form-group my-3">
+                    <label asp-for="Email">E-Mail</label>
+                    <input placeholder="Örn:example@gmail.com" type="email" asp-for="Email" class="form-control" />
+                </div>
+
+                <div class="form-group my-3">
+                    <label asp-for="Password">Şifre</label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                </div>
+
+                <div class="form-group my-3 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Kayıt Ol
+                    </button>
+                </div>
+            </form>
+            <div id="RegisterGirisiRegisterMetni">
+                Zaten hesabınız var mı? Giriş yapmak için lütfen <a asp-action="Index" asp-controller="Home">buraya tıklayın. </a>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "27347897-4f7e-4ecd-be10-cd6a8d4639c7": {
+      "ProjectGuid": "27347897-4f7e-4ecd-be10-cd6a8d4639c7",
+      "DisplayName": "LMS.Entities",
+      "ColorIndex": 0
+    },
+    "682555eb-0c01-44a0-8fb5-b1e905a7c81a": {
+      "ProjectGuid": "682555eb-0c01-44a0-8fb5-b1e905a7c81a",
+      "DisplayName": "LMS.Repositories",
+      "ColorIndex": 1
+    },
+    "61a7e233-76b3-496b-b3c3-7b5b8013a8cf": {
+      "ProjectGuid": "61a7e233-76b3-496b-b3c3-7b5b8013a8cf",
+      "DisplayName": "LMS.Services",
+      "ColorIndex": 2
+    },
+    "70561fd9-a35b-4935-81e9-df40d54bf8df": {
+      "ProjectGuid": "70561fd9-a35b-4935-81e9-df40d54bf8df",
+      "DisplayName": "LMS.App",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 4
+}

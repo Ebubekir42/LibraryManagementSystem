@@ -1,0 +1,287 @@
+﻿@model OrderList
+
+<div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUser">
+                <div class="TamSayfaCerceveAlaniIciAltiCizgiliBaslikAlaniUstBaslikMetniUser">
+                    Kütüphaneden Teslim Alınacak Kitaplar
+                </div>
+            </div>
+            <div style="/*display:block; border-radius:8px;*/ border:solid 1px rgba(0,0,0,0.2); overflow:hidden; /*margin-left:-9px;*/">
+
+        <table class="table table-striped table-hover" style="font-size:12px;">
+            <thead >
+                <tr >
+                    <th style="background:#36304a; " ></th>
+                    <th style="background:#36304a; color:white;" >Kitap Adı</th>
+                    <th style="background:#36304a; color:white;" >Müşteri Ad/Soyad</th>
+                    <th style="background:#36304a; color:white;">Telefon No/Email</th>
+                    <th style="background:#36304a; color:white;">İl/İlçe</th>
+                    <th style="background:#36304a; color:white;" >Adres</th>
+                    <th style="background:#36304a; color:white;" >Sipariş No</th>
+                    <th style="background:#36304a; color:white;" >Teslim Alan Kurye Ad/Soyad</th>
+                    <th style="background:#36304a; "></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach(var orderInfo in Model.OrderInfos)
+                {@*<img src="~/images/book.jpg" class="img-fluid" /> <br />@orderInfo.Title <br/> <i class="fa-solid fa-square-info"></i>*@
+                    <tr >
+                        <td><img src="@orderInfo.Book.Resim" class="img-fluid" style="height:60px; width:120px;" /></td>
+                        <td>
+                            <div style="padding-bottom:5px;"><span>@orderInfo.Book.Title</span></div>
+                            <div>
+                                <span><button style="width:30px; height:30px; padding:3px;" class="btn btn-outline-primary ayrintiBtn" type="submit"><i class="fa-solid fa-circle-info"></i></button>
+                                    <div class="info-modal customModal">
+                                        <div class="info-modal-content">
+                                            <span class="info-close closeModalBtn" >&times;</span>
+                                            <div>
+                                                <table class="table table-sm text-start" style="font-size:13px;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-muted small">Format</td>
+                                                            <td>@await Component.InvokeAsync("Format",orderInfo.Book.FormatId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Başlık</td>
+                                                            <td>@orderInfo.Book.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">ISBN No</td>
+                                                            <td>@orderInfo.Book.ISBN_No</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayınlayan</td>
+                                                            <td>@orderInfo.Book.Yayinlayan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Yeri</td>
+                                                            <td>@orderInfo.Book.Yayin_Yeri</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Yayın Tarihi</td>
+                                                            <td>@orderInfo.Book.Yayin_Tarihi</td>
+                                                        </tr>
+                                                        @if(orderInfo.Book.Yayın_Gelis_Tarihi is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Yayın Geliş Tarihi</td>
+                                                            <td>@orderInfo.Book.Yayın_Gelis_Tarihi</td>
+                                                            </tr>
+                                                        }
+                                                        @if(orderInfo.Book.CopyRightDate is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Telif Hakkı Tarihi</td>
+                                                            <td>@orderInfo.Book.CopyRightDate</td>
+                                                            </tr>
+                                                        }
+                                                        <tr>
+                                                            <td class="text-muted small">Taşıyıcı Türü</td>
+                                                            <td>@await Component.InvokeAsync("CarrierType",orderInfo.Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Medya Türü</td>
+                                                            <td>@await Component.InvokeAsync("MediaType",orderInfo.Book.CarrierTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">İçerik Türü</td>
+                                                            <td>@await Component.InvokeAsync("ContentType",orderInfo.Book.ContentTypeId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Dil</td>
+                                                            <td>@await Component.InvokeAsync("Language",orderInfo.Book.LanguageId)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Baskı</td>
+                                                            <td>@orderInfo.Book.Baski</td>
+                                                        </tr>
+                                                        <tr book="@orderInfo.Book" book-info=""></tr>
+                                                        @if(orderInfo.Book.Sorumlular is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Sorumlular</td>
+                                                                <td>@orderInfo.Book.Sorumlular</td>
+                                                            </tr>
+                                                        }
+                                                        <tr book="@orderInfo.Book" book-category=""></tr>
+                                                        @if(orderInfo.Book.Summary is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Özet</td>
+                                                            <td>@orderInfo.Book.Summary</td>
+                                                            </tr>
+                                                        }
+                                                        @if(orderInfo.Book.Konular is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Konular</td>
+                                                            <td>@orderInfo.Book.Konular</td>
+                                                            </tr>
+                                                        }
+                                                        @if(orderInfo.Book.Notes is not null)
+                                                        {
+                                                            <tr>
+                                                            <td class="text-muted small">Not</td>
+                                                            <td>@orderInfo.Book.Notes</td>
+                                                            </tr>
+                                                        }
+                                                        @if(orderInfo.Book.Fiziksel_Nitelik is not null)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-muted small">Fiziksel Nitelik</td>
+                                                                <td>@orderInfo.Book.Fiziksel_Nitelik</td>
+                                                            </tr>
+                                                        }
+                                                        
+                                                        <tr>
+                                                            <td class="text-muted small">Kopya</td>
+                                                            <td>@orderInfo.Book.Kopya</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Oda / Dolap / Raf</td>
+                                                            <td>@orderInfo.Book.Oda / @orderInfo.Book.Dolap / @orderInfo.Book.Raf</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-muted small">Ödünç Sayısı</td>
+                                                            <td>@await Component.InvokeAsync("BookLoan",orderInfo.Book.BookId)</td>
+                                                        </tr>
+
+                                                        <tr book="@orderInfo.Book" book-loan=""></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </td>
+                        <td>@orderInfo.FirstName <br />@orderInfo.LastName</td>
+                        <td>@orderInfo.PhoneNumber <br /> @orderInfo.Email</td>
+                        <td>@orderInfo.Province <br /> @orderInfo.District</td>
+                        <td>@orderInfo.Address</td>
+                        <td>@orderInfo.OrderNo</td>
+                        @if(@orderInfo.KuryeId is not null)
+                        {
+                            <td>@await Component.InvokeAsync("OrderKurye",arguments:@orderInfo.KuryeId)</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td style="text-wrap:nowrap;">
+                            <form asp-action="Buy" method="post" buyOrder="" orderId="@orderInfo.Id" kuryeId="@Model.CurrentKuryeId">
+                                @*<input type="hidden" name="deliverId" value="@orderInfo.Id"/>*@
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+
+@*<div class="text-center my-3 border-bottom">
+        <div class="my-3 text-center" style="font-size:20px; font-weight:bold; background:rgba(200,200,200,0.1); width:240px; margin:0 auto; border-radius:6px; padding:12px; border:solid 1px; ">Kütüphaneden Teslim Alınacak Kitaplar</div>
+
+</div>
+<div class="text-center">
+    <div class="my-3">
+        <div style="display:flex; border:solid 1px black; height:35px; width:457px;">
+            <div style="display:flex; align-items:center; overflow:hidden; background:white; width:221px;">
+                <i class="fa-sharp fa-thin fa-magnifying-glass" style="color:#e5e5e5; padding:6px; font-size:14px;"  ></i>
+                <input class="filtreInput" type="text" name="inKategori" />
+            </div>
+            <div style="border:solid 1px black; width:194px; text-align:left; position:relative; padding:3px; padding-left:7px;">ISBN Numarası <i style="position:absolute; display:inline-block; right:7px; top:25%;" class="fa-solid fa-caret-down" style="position:absolute; display:inline-block;" ></i></div>
+            <div><button type="submit" style="height:34px;">Ara</button></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div style="display:block; border-radius:8px; border:solid 1px rgba(0,0,0,0.2); overflow:hidden; margin-left:-9px;">
+
+        <table class="table table-striped table-hover" style="font-size:12px;">
+            <thead >
+                <tr >
+                    <th style="background:#36304a; " ></th>
+                    <th style="background:#36304a; color:white;" >Kitap Adı</th>
+                    <th style="background:#36304a; color:white;" >Müşteri Ad/Soyad</th>
+                    <th style="background:#36304a; color:white;">Telefon No/Email</th>
+                    <th style="background:#36304a; color:white;">İl/İlçe</th>
+                    <th style="background:#36304a; color:white;" >Adres</th>
+                    <th style="background:#36304a; color:white;" >Teslim Alan Kurye Ad/Soyad</th>
+                    <th style="background:#36304a; "></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach(var orderInfo in Model.OrderInfos)
+
+                    <tr >
+                        <td><img src="~/images/book.jpg" class="img-fluid" style="height:37px;" /></td>
+                        <td>
+                            <div style="padding-bottom:5px;"><span>@orderInfo.Book.Title</span></div>
+                            <div>
+                                <span><button style="width:30px; height:30px; padding:3px;" class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-circle-info"></i></button></span>
+                            </div>
+                        </td>
+                        <td>@orderInfo.FirstName <br />@orderInfo.LastName</td>
+                        <td>@orderInfo.PhoneNumber <br /> @orderInfo.Email</td>
+                        <td>@orderInfo.Province <br /> @orderInfo.District</td>
+                        <td>@orderInfo.Address</td>
+                        @if(@orderInfo.KuryeId is not null)
+                        {
+                            <td>@await Component.InvokeAsync("OrderKurye",arguments:@orderInfo.KuryeId)</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td style="text-wrap:nowrap;">
+                            <form asp-action="Buy" method="post" buyOrder="" orderId="@orderInfo.Id" kuryeId="@Model.CurrentKuryeId">
+                  
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>*@
+
+
+@section Scripts{
+    <script>
+        var ayrintiBtn = document.querySelectorAll(".ayrintiBtn");
+    var customModal = document.querySelectorAll(".customModal");
+    var closeModalBtn = document.querySelectorAll(".closeModalBtn");
+    ayrintiBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "block";
+        });
+    });
+    closeModalBtn.forEach(function(btn,index){
+        btn.addEventListener("click",function(){
+            customModal[index].style.display = "none";
+        });
+    });
+    window.addEventListener("click",function(event){
+        customModal.forEach(function(btn,index){
+            if(event.target == btn){
+                btn.style.display = "none";
+            }
+        });
+    });
+    </script>
+}
